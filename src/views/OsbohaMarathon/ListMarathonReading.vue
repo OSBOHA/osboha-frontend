@@ -23,6 +23,9 @@
                     نقاط الاسبوع
                   </th>
                   <th>
+                    نقاط اضافية
+                  </th>
+                  <th>
                     خصم نقاط
                   </th>
                 </tr>
@@ -31,6 +34,9 @@
                 <tr>
                   <td>
                     {{ points }}
+                  </td>
+                  <td>
+                    {{ week_bonuses }}
                   </td>
                   <td>
                     {{ violations_points }}
@@ -99,6 +105,7 @@ export default {
       can_edit: true,
       points: 0,
       violations_points: 0,
+      week_bonuses: 0,
     };
   },
   async created() {
@@ -107,8 +114,9 @@ export default {
       if (this.current_marathon) {
         const response = await MarathonPoints.getSpecificMarathonWeekPoints(this.$route.params.ambassador_id, this.current_marathon.id, this.$route.params.week_id);
         if (response) {
-          this.points = response.points
-          this.violations_points = response.violations_points
+          this.points = response.points;
+          this.violations_points = response.violations_points;
+          this.week_bonuses = response.week_bonuses;
 
         }
       }

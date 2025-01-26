@@ -2,60 +2,62 @@
     <main>
 
         <div class="row">
-            <div class="col-lg-12" v-if="book">
-                <div class="card card-block card-stretch card-height blog blog-detail">
-                    <div class="card-body">
-                        <div class="position-absolute start-0">
-                            <span role="button" @click="download(book.link)"
-                                class="material-symbols-outlined align-middle display-5 me-1s">
-                                download
-                            </span>
-                            <router-link class="material-symbols-outlined align-middle display-5 me-3" :to="{
-                                name: 'book.update',
-                                params: { book_id: book.id },
-                            }" v-if="isAdmin || inBooksTeam || book_owner">
-                                edit
-                            </router-link>
-                        </div>
-
-                        <div class="image-block text-center mt-3">
-                            <img :src="resolve_img_url(book.media.path ?? '')" class="img-fluid rounded w-25"
-                                alt="blog-img" />
-                        </div>
-                        <div class="blog-description mt-3 text-center">
-                            <h2 class="mb-3 pb-3 border-bottom text-center">
-                                {{ book.name }}
-                            </h2>
-                            <div class="blog-meta d-flex align-items-center mb-3 position-right-side flex-wrap">
-                                <div class="date me-4 d-flex align-items-center">
-                                    <i class="material-symbols-outlined pe-2 md-18 text-primary">calendar_month</i>تاريخ
-                                    الاضافة {{
-                                        formattedDate }}
-                                </div>
-                                <div class="comments me-4 d-flex align-items-center">
-                                    <i class="material-symbols-outlined pe-2 md-18 text-primary">
-                                        book
-                                    </i>
-                                    عدد الصفحات:
-                                    {{ book.end_page }}
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                {{ shortBriefText }}
-                                <a class="load-btn" v-on:click="loadMoreBriefText" v-if="isMore">...قراءة المزيد</a>
-                                <a class="load-btn" v-on:click="loadLessBriefText" v-if="isLess">قراءة أقل</a>
-                            </div>
-                            <div class="col-lg-12 mt-3">
-                                <div class="card card-block card-stretch card-height blog">
-                                    <router-link :to="{
-                                        name: 'book.book-details',
-                                        params: { book_id: book.id },
-                                    }" class="btn btn-primary d-block w-100" :disabled="!(book.allow_comments)">
-                                        عرض الأطروحات
-                                    </router-link>
-                                </div>
+            <div class="col-lg-12" v-if="books.length > 0">
+                <div class="d-grid gap-3 d-grid-template-1fr-19">
+                    <div class="card card-block card-stretch card-height blog blog-detail" v-for="book in books"
+                        :key="book.id">
+                        <div class="card-body">
+                            <div class="position-absolute start-0">
+                                <span role="button" @click="download(book.link)"
+                                    class="material-symbols-outlined align-middle display-5 me-1s">
+                                    download
+                                </span>
+                                <router-link class="material-symbols-outlined align-middle display-5 me-3" :to="{
+                                    name: 'book.update',
+                                    params: { book_id: book.id },
+                                }" v-if="isAdmin || inBooksTeam || book_owner">
+                                    edit
+                                </router-link>
                             </div>
 
+                            <div class="image-block text-center mt-3">
+                                <img :src="resolve_img_url(book.media?.path ?? '')" class="img-fluid rounded w-25"
+                                    alt="blog-img" />
+                            </div>
+                            <div class="blog-description mt-3 text-center">
+                                <h2 class="mb-3 pb-3 border-bottom text-center">
+                                    {{ book.name }}
+                                </h2>
+                                <div class="blog-meta d-flex align-items-center mb-3 position-right-side flex-wrap">
+                                    <div class="date me-4 d-flex align-items-center">
+                                        <i
+                                            class="material-symbols-outlined pe-2 md-18 text-primary">calendar_month</i>تاريخ
+                                        الاضافة {{
+                                            formattedDate }}
+                                    </div>
+                                    <div class="comments me-4 d-flex align-items-center">
+                                        <i class="material-symbols-outlined pe-2 md-18 text-primary">
+                                            book
+                                        </i>
+                                        عدد الصفحات:
+                                        {{ book.end_page }}
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    {{ shortBriefText(book.brief) }} ...
+                                </div>
+                                <div class="col-lg-12 mt-3">
+                                    <div class="card card-block card-stretch card-height blog">
+                                        <router-link :to="{
+                                            name: 'book.book-details',
+                                            params: { book_id: book.id },
+                                        }" class="btn btn-primary d-block w-100" :disabled="!(book.allow_comments)">
+                                            المزيد
+                                        </router-link>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,20 +73,21 @@ import UserInfoService from "@/Services/userInfoService";
 export default {
     name: "Latest Book",
     async created() {
-        this.book = await bookService.latestBooks();
-        this.fullBriefText = this.book.brief;
-        this.shortBriefText = this.fullBriefText?.slice(0, 200);
+        this.books = await bookService.latestBooks();
+        // this.fullBriefText = this.book.brief;
     },
     data() {
         return {
-            book: null,
+            books: [],
             fullBriefText: "",
-            shortBriefText: "",
 
         };
     },
 
     methods: {
+        shortBriefText(fullBriefText) {
+            return fullBriefText?.slice(0, 200);
+        },
         loadMoreBriefText() {
             this.shortBriefText = this.fullBriefText;
         },
@@ -129,4 +132,3 @@ export default {
     cursor: pointer;
 }
 </style>
-  

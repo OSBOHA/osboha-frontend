@@ -147,7 +147,7 @@ export default {
       }
     }
 
-    // this.fireAlert()
+    this.fireAlert()
   },
   methods: {
     addPost(post) {
@@ -170,9 +170,10 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: " هل أنتم مستعدون لتحدي الأفكار؟  ❓",
-          text: `بإصرارك يمكنك أن تكمل الطريق في أي ظرف، فالعظماء لا يستسلمون، بل يجدون راحتهم في التحديات لتحقيق أهدافهم، بإيمانهم القوي بإمكاناتهم`,
-          imageUrl: require('@/assets/images/main/alertMsg.png'),
+          title: " كتب جديدة ✨📚",
+          text: `٧٠ كتاب جديد، ٧٠ باب للدهشة والإلهام بانتظارك في أصبوحة ١٨٠… استعد، القادم أسطوري!” تفقد خانة مضاف حديثًا 👆🏼`,
+          imageUrl: require('@/assets/images/main/relax.png'),
+          imageHeight: 200,
           imageAlt: 'A tall image',
           showConfirmButton: true,
           showCancelButton: true,
@@ -187,9 +188,10 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({
-              name: "osboha.post", params: {
-                post_id: 50027
-              }
+              name: "book.latest",
+              //params: {
+              //   post_id: 50027
+              // }
             });
           }
         });

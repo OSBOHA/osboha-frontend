@@ -8,7 +8,8 @@
             <marathon_points_summury :basic_points="basic_points" :bonus_points="bonus_points"
                 :total_points="total_points" :week_violations="week_violations" />
             <div class="iq-card-body p-3">
-                <marathon_points_details :point_details="point_details" :week_violations="week_violations" />
+                <marathon_points_details :point_details="point_details" :week_violations="week_violations"
+                    :week_bonuses="week_bonuses" />
 
                 <div v-if="isِAllowedToAddPoints && current_marathon">
                     <hr />
@@ -69,6 +70,7 @@ export default {
             group_name: null,
             basic_points: null,
             week_violations: null,
+            week_bonuses: null,
             bonus_points: 0,
             total_points: 0,
             user_name: '',
@@ -90,6 +92,7 @@ export default {
                 this.total_points = response.total_points;
                 this.point_details = response.point_details;
                 this.week_violations = response.week_violations;
+                this.week_bonuses = response.week_bonuses
             }
 
         }
