@@ -8,29 +8,34 @@
             <marathon_points_summury :basic_points="basic_points" :bonus_points="bonus_points"
                 :total_points="total_points" :week_violations="week_violations" />
             <div class="iq-card-body p-3">
-                <marathon_points_details :point_details="point_details" :week_violations="week_violations" />
+                <marathon_points_details :point_details="point_details" :week_violations="week_violations"
+                    :week_bonuses="week_bonuses" />
 
-                <div v-if="isMarathonAdministrator">
+                <div v-if="isِAllowedToAddPoints && current_marathon">
                     <hr />
-                    <h3 role="button" @click="() => { show_add_extra_points = !show_add_extra_points; show_points_deduction = false; }">
+                    <h3 role="button"
+                        @click="() => { show_add_extra_points = !show_add_extra_points; show_points_deduction = false; }">
                         اعتماد نقاط اضافية
                         <span class="material-symbols-outlined align-middle">
                             add
                         </span>
                     </h3>
-                    <add_extra_points @bonus-added="setPoints()"  v-if="show_add_extra_points"/>
+                    <add_extra_points @bonus-added="setPoints()" v-if="show_add_extra_points"
+                        :current_marathon="current_marathon" />
                 </div>
 
-                <div v-if="isMarathonAdministrator">
+                <div v-if="isMarathonAdministrator && current_marathon">
                     <hr />
-                    <h3 role="button" @click="() => { show_points_deduction = !show_points_deduction; show_add_extra_points = false; }">
+                    <h3 role="button"
+                        @click="() => { show_points_deduction = !show_points_deduction; show_add_extra_points = false; }">
                         خصم نقاط
                         <span class="material-symbols-outlined align-middle">
                             remove
                         </span>
                     </h3>
 
-                    <point-deduction @points-deducted="setPoints()" v-if="show_points_deduction" />
+                    <point-deduction @points-deducted="setPoints()" v-if="show_points_deduction"
+                        :current_marathon="current_marathon" />
                 </div>
             </div>
         </iq-card>
@@ -43,6 +48,7 @@ import add_extra_points from "@/components/Marathon/AddExtraPoints";
 import MarathonPoints from "@/API/MarathonServices/marathon-points.service";
 import UserInfoService from "@/Services/userInfoService";
 import PointDeduction from '@/components/Marathon/PointDeduction.vue';
+import OsbohaMarathon from "@/API/MarathonServices/osboha-marathon.service";
 
 export default {
     name: "List Marathon Points",
@@ -53,14 +59,18 @@ export default {
         PointDeduction,
     },
     async created() {
-        await this.setPoints()
+        await this.setPoints();
+        this.current_marathon = await OsbohaMarathon.getCurrentMarathon();
+
     },
     data() {
         return {
+            current_marathon: null,
             osboha_marathon: null,
             group_name: null,
             basic_points: null,
-            week_violations:null,
+            week_violations: null,
+            week_bonuses: null,
             bonus_points: 0,
             total_points: 0,
             user_name: '',
@@ -82,6 +92,7 @@ export default {
                 this.total_points = response.total_points;
                 this.point_details = response.point_details;
                 this.week_violations = response.week_violations;
+                this.week_bonuses = response.week_bonuses
             }
 
         }
@@ -97,6 +108,16 @@ export default {
                 'marathon_verification_supervisor',
             ]);
         },
+        isِAllowedToAddPoints() {
+            return UserInfoService.hasRoles(this.user, [
+                "admin",
+                "marathon_coordinator",
+                'marathon_verification_supervisor',
+                'marathon_supervisor'
+            ]);
+        },
+
+
     },
 
 };

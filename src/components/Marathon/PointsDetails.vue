@@ -7,13 +7,18 @@
                         <div class="timeline-content">
                             <div class="timeline-icon">
                                 <span class="animate-charcter text-center">
-                                    {{ Math.max(totalDailyPoints(detail) - getViolationByIndex(index + 1), 0) }}
-                                </span>
+                                    {{
+                                        (totalDailyPoints(detail) + getWeekBonusesByIndex((index + 1), 0) - getViolationByIndex(index + 1) <= 50 ?
+                                            totalDailyPoints(detail) + getWeekBonusesByIndex((index + 1), 0) : 50) - getViolationByIndex(index + 1) }}
+                                        </span>
                             </div>
                             <h3 class="title">{{ MARATHON_WEEKS[key] }}</h3>
                             <div class="description">
                                 <p class="mt-3 mb-1">
                                     المجموع الكلي للنقاط: {{ totalDailyPoints(detail) }}
+                                </p>
+                                <p>
+                                    النقاط الاضافية: {{ getWeekBonusesByIndex((index + 1), 0) }}
                                 </p>
                                 <p>
                                     خصم نقاط: {{ getViolationByIndex(index + 1) }}
@@ -48,6 +53,10 @@ export default {
             type: [Object],
             required: true,
         },
+        week_bonuses: {
+            type: [Object],
+            required: true,
+        },
     },
     data() {
         return {
@@ -56,14 +65,16 @@ export default {
     },
     methods: {
         totalDailyPoints(achevement) {
-            return achevement.reduce((total, achevement) => total + achevement.daily_points, 0);
+            const points = achevement.reduce((total, achevement) => total + achevement.daily_points, 0);
+            return points >= 50 ? 50 : points
+        },
+        getWeekBonusesByIndex(index) {
+            return this.week_bonuses[`week_bonuses_${index}`] || 0;
         },
         getViolationByIndex(index) {
             return this.week_violations[`week_violations_${index}`] || 0;
         },
-
-
-    }
+    },
 };
 </script>
 
