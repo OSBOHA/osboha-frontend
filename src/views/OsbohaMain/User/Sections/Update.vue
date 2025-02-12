@@ -55,7 +55,7 @@
         <hr />
 
         <div class="mt-3 row"
-          v-if="profileInfo && (profileInfo.first_name_ar && profileInfo.middle_name_ar && profileInfo.last_name_ar)">
+          v-if="profileInfo && (profileInfo.first_name_ar && profileInfo.last_name_ar)">
           <div class="form-group col-6">
             <div class="image-block text-center">
               <img :src="official_document_image_src" class="img-fluid rounded w-50" alt="official_document"
