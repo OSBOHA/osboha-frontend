@@ -884,6 +884,23 @@ const superReviewer = (prop, mode = false) => [
     component: () => import("../views/OsbohaEligible/SuperReviewer/Accepted"),
   },
 ];
+const SuperAuditer = (prop, mode = false) => [
+  {
+    path: "team-work",
+    name: prop + ".team-work",
+    meta: { auth: true, name: "team-work" },
+    component: () => import("../views/OsbohaEligible/SuperAuditer/teamWork"),
+  },
+  {
+    path: "ready-to-audit",
+    name: prop + ".ready-to-audit",
+    meta: { auth: true, name: "ready-to-audit" },
+    component: () =>
+      import(
+        "../views/OsbohaEligible/SuperAuditer/ReadyToAudit"
+      ),
+  },
+];
 const eligibleTeamChildRoute = (prop, mode = false) => [
   {
     path: "team-work",
@@ -1351,6 +1368,13 @@ const routes = [
     component: () => import("../layouts/Default"),
     meta: { auth: true },
     children: superReviewer("super-reviewer"),
+  },
+  {
+    path: "/super-auditer",
+    name: "super-auditer",
+    component: () => import("../layouts/Default"),
+    meta: { auth: true },
+    children: SuperAuditer("super-auditer"),
   },
 
   /* ########## End Eligible Routes ########## */

@@ -170,9 +170,9 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: " كتب جديدة ✨📚",
-          text: `٧٠ كتاب جديد، ٧٠ باب للدهشة والإلهام بانتظارك في أصبوحة ١٨٠… استعد، القادم أسطوري!” تفقد خانة مضاف حديثًا 👆🏼`,
-          imageUrl: require('@/assets/images/main/relax.png'),
+          title: " رمضان شهر الفرص، وهذه فرصتك لتعيش تجربةً مختلفةّ مع فعاليات رمضان بمشروع أصبوحة 180",
+          text: `تفقد المنشور لتصلَ من خلاله لرابط مجموعة فعاليات رمضان. 🌙📚`,
+          imageUrl: require('@/assets/images/main/alertMsg.jpg'),
           imageHeight: 200,
           imageAlt: 'A tall image',
           showConfirmButton: true,
@@ -188,10 +188,10 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({
-              name: "book.latest",
-              //params: {
-              //   post_id: 50027
-              // }
+              name: "osboha.post",
+              params: {
+                post_id: 52696
+              }
             });
           }
         });

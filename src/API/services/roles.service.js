@@ -27,7 +27,7 @@ class RolesService {
   async assignNonBasicRole(formData) {
     try {
       const response = await api.post(
-        `${this.prefix}/assign-role-v2`,
+        `${this.prefix}/assign-non-basic-role`,
         formData,
       );
       return response.data.data;

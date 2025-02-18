@@ -82,7 +82,7 @@
 
                                     </div>
                                  </div>
-                                 <iq-card v-if="informations.status == 'review' || informations.status == 'audit'">
+                                 <iq-card v-if="(informations.status == 'review' || informations.status == 'audit') && (isSuper || isReviewer)">
                                     <template v-slot:headerTitle>
                                        <h4 class="card-title">قبول - اعادة - رفض</h4>
                                     </template>
@@ -112,7 +112,7 @@
                                              <!-- RETARD -->
 
                                              <input type="button" value="اعادة" class="btn btn-warning d-block mt-3 w-100"
-                                                v-if="!retard" @click="setRetard()" />
+                                                v-if="!retard " @click="setRetard()" />
                                              <div class="col-md-12 mb-3 form-group mt-2" v-if="retard">
                                                 <label for="retardNote" class="form-label">سبب الاعادة *</label>
                                                 <textarea name="retardNote" class="form-control" id="retardNote" rows="5"
@@ -126,7 +126,6 @@
                                                          style="height: 100px;">
                                                    </div>
                                                 </div>
-
                                                 <input type="button" value="اعادة"
                                                    class="btn btn-warning d-block mt-3 w-100"
                                                    @click="retardInfo(informations.id)" />

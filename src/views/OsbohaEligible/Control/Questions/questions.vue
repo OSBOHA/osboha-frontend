@@ -14,8 +14,10 @@
                <h4 class="card-title">الأسئلة</h4>
                <span class="px-2" v-if="isReviewer"> اسم السفير :
                   {{ (questions[0].user_book.user.user_profile.first_name_ar) }}
-                  {{( questions[0].user_book.user.user_profile.middle_name_ar  ? questions[0].user_book.user.user_profile.middle_name_ar : '' )}}
-                  {{ (questions[0].user_book.user.user_profile.last_name_ar  ? questions[0].user_book.user.user_profile.last_name_ar : '') }}
+                  {{ (questions[0].user_book.user.user_profile.middle_name_ar ?
+                     questions[0].user_book.user.user_profile.middle_name_ar : '' )}}
+                  {{ (questions[0].user_book.user.user_profile.last_name_ar ?
+                     questions[0].user_book.user.user_profile.last_name_ar : '') }}
 
                </span>
                <span class="px-2" v-else> اسم السفير : ***************</span>
@@ -25,7 +27,7 @@
             <template v-slot:body>
                <form id="form-wizard1" class="text-center mt-3">
                   <ul id="top-tab-list" class="p-0 row list-inline">
-                     <li v-for="(question, index) in  questions" :key="index" :class="checkActive(index, index + 1)"
+                     <li v-for="(question, index) in questions" :key="index" :class="checkActive(index, index + 1)"
                         class="col-lg-3 col-6 mb-2 text-start" @click="changeTab(index + 1)" id="account">
                         <a href="javascript:void(0);">
                            <span class="material-symbols-outlined align-middle" v-if="question.status == 'review'">
@@ -39,7 +41,7 @@
                      </li>
                   </ul>
                   <!-- fieldsets -->
-                  <fieldset v-for="(question, index) in  questions" :key="index"
+                  <fieldset v-for="(question, index) in questions" :key="index"
                      :class="current == index + 1 ? 'd-block' : 'd-none'">
                      <question :question="question" :userBook='userBook' :index='index' @onNext="changeTab"
                         :reviewStage="true" />
@@ -47,7 +49,7 @@
                </form>
             </template>
          </iq-card>
-         <iq-card>
+         <iq-card v-if="isSuper || isReviewer">
             <template v-slot:headerTitle>
                <h4 class="card-title">قبول - رفض</h4>
             </template>
@@ -96,7 +98,8 @@
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 form-group">
                      <div class="image-block text-center">
-                        <img src="@/assets/images/main/accept-reject.png" class="img-fluid rounded w-75" alt="blog-img" />
+                        <img src="@/assets/images/main/accept-reject.png" class="img-fluid rounded w-75"
+                           alt="blog-img" />
                      </div>
                   </div>
                </div>

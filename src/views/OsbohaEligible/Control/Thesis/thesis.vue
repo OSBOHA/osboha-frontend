@@ -75,13 +75,6 @@
                                                 <label class="form-check-label" for="rule1">تم التحقق أن الأطروحة حصرية
                                                     لكاتبها.</label>
                                             </div>
-                                            <!-- <div
-                                            class="form-check form-check-inline form-checkbox form-checkbox-color me-2">
-                                            <input type="checkbox" class="form-check-input" id="rule2" ref="rule2"
-                                                :checked="rule2" @change="setRule2()">
-                                            <label class="form-check-label" for="rule2">تم التأكد من وجود الأطروحة في
-                                                مجموعة سفراء أصبوحة.</label>
-                                        </div> -->
 
                                             <!-- ACCEPT -->
                                             <input type="button" value="قبول" class="btn btn-primary d-block w-100 mt-3 "

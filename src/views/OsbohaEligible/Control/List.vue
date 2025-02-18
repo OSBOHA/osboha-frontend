@@ -247,7 +247,7 @@
                             <hr />
 
                             <div class="row">
-                                <div class="col-6 col-md-6 col-lg-6">
+                                <div class="col-6 col-md-6 col-lg-6" v-if="isSuperReviewer">
                                     <div class="card">
                                         <router-link :to="{ name: 'ReadyToAudit', }">
                                             <div class="card-body">
@@ -262,6 +262,27 @@
                                                 <div class="mt-2">
                                                     <h3 class="mb-0 text-center">
                                                         توثيق جاهز للتقييم
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6" v-if="isSuperReviewer">
+                                    <div class="card">
+                                        <router-link :to="{ name: 'super-reviewer.returned', }">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div
+                                                        class="border rounded d-flex align-items-center justify-content-center">
+                                                        <i class="display-1 img-fluid material-symbols-outlined">
+                                                            undo
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <h3 class="mb-0 text-center">
+                                                    التوثيقات المعادة
                                                     </h3>
                                                 </div>
                                             </div>
@@ -292,6 +313,39 @@
 
                             </div>
                         </div>
+
+                        <!-- ########## Admin - Reviewer ########## -->
+                        <div class="col-12" v-if="isSuperAuditer">
+                            <h1 class="text-center">
+                                ادوات التقييم
+                            </h1>
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-6 col-md-6 col-lg-6">
+                                    <div class="card">
+                                        <router-link :to="{ name: 'super-auditer.ready-to-audit', }">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div
+                                                        class="border rounded d-flex align-items-center justify-content-center">
+                                                        <i class="display-1 img-fluid material-symbols-outlined">
+                                                            verified
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <h3 class="mb-0 text-center">
+                                                        توثيق جاهز للتقييم
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -359,6 +413,20 @@ export default {
         isSuper_teamLeader() {
             return UserInfoService.hasRoles(this.user, [
                 "super_auditer",
+                "super_reviewer",
+            ]);
+        },
+        isSuperAuditer() {
+            return UserInfoService.hasRoles(this.user, [
+                "admin",
+                "eligible_admin",
+                "super_auditer",
+            ]);
+        },
+        isSuperReviewer() {
+            return UserInfoService.hasRoles(this.user, [
+                "admin",
+                "eligible_admin",
                 "super_reviewer",
             ]);
         },

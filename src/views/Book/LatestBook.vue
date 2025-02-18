@@ -60,6 +60,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class=" d-flex justify-content-center w-100">
+                        <router-link :to="{
+                            name: 'osboha.book',
+                        }" class="btn btn-primary w-75">
+                            عرض الكل
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>

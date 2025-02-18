@@ -1,5 +1,5 @@
 import { api } from "../Intercepter";
-import store from '../../store';
+import store from "../../store";
 
 class userBookServices {
   constructor() {
@@ -38,6 +38,27 @@ class userBookServices {
 
     return response.data.data;
   }
+  async getEligibleUserBooksWithAuditStatus() {
+    const response = await api.get(`${this.prefix}/get-books/audit-status`);
+    return response.data.data;
+  }
+
+  async getBooksWithRetardStatus() {
+    const response = await api.get(`${this.prefix}/get-books/retard-status`);
+    return response.data.data;
+  }
+
+  async undoRetard(book_id, retard_type) {
+    const response = await api
+      .patch(`${this.prefix}/undo/retard/${book_id}`, {
+        retard_type: retard_type,
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return response.data.data;
+  }
+
   async getByBookID(id) {
     const response = await api.get(`${this.prefix}/by-book-id/${id}`);
     return response.data.data;
@@ -49,7 +70,6 @@ class userBookServices {
       .catch((error) => {
         console.log(error);
       });
-    console.log(response);
     return response;
   }
   async requestCertificate(id) {
@@ -74,9 +94,7 @@ class userBookServices {
 
   async lastAchievement() {
     try {
-      const response = await api.get(
-        `${this.prefix}/last-achievement/`,
-      );
+      const response = await api.get(`${this.prefix}/last-achievement/`);
       return response.data.data;
     } catch (e) {
       console.log(e);
@@ -85,9 +103,7 @@ class userBookServices {
 
   async finishedAchievement() {
     try {
-      const response = await api.get(
-        `${this.prefix}/finished-achievement/`,
-      );
+      const response = await api.get(`${this.prefix}/finished-achievement/`);
       return response.data.data;
     } catch (e) {
       console.log(e);
