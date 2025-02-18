@@ -1,5 +1,5 @@
 import { api } from "../Intercepter";
-import store from '../../store';
+import store from "../../store";
 
 class ThesesServices {
   constructor() {
@@ -25,10 +25,18 @@ class ThesesServices {
     return response;
   }
 
-
   async reviewThesis(id) {
     const res = await api.patch(`${this.prefix}/review-thesis/${id}`);
   }
+  async undoAccept(id) {
+    const response = await api
+      .patch(`${this.prefix}/undo/accept/${id}`, {})
+      .catch((error) => {
+        console.log(error);
+      });
+    return response.data.data;
+  }
+
   async deleteThesis(id) {
     const response = api.delete(`${this.prefix}/${id}`);
     return response;
@@ -89,7 +97,6 @@ class ThesesServices {
     return thesis.data.data;
   }
   async getByUserBook(eligible_user_books_id, status) {
-    
     const thesis = await api.get(
       `${this.prefix}/eligible_user_books_id/${eligible_user_books_id}&${status}`,
     );

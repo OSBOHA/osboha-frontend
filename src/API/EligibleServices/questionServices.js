@@ -1,5 +1,5 @@
 import { api } from "../Intercepter";
-import store from '../../store';
+import store from "../../store";
 
 class questionServices {
   constructor() {
@@ -15,6 +15,11 @@ class questionServices {
     const questions = await api.get(`${this.prefix}/user-book/${id}`);
 
     return questions.data.data;
+  }
+
+  async undoAccept(id) {
+    const response = await api.patch(`${this.prefix}/undo/accept/${id}`);
+    return response.data.data;
   }
 
   async addDegree(id, note, mark) {

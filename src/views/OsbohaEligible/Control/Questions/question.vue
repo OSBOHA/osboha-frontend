@@ -37,13 +37,13 @@
                                 <div class="col-md-12 form-group">
                                 </div>
                             </div>
-                            
+
                             <div v-if="reviewStage">
 
                                 <div class="col-md-12 mb-3 form-group" v-if="(question.status == 'audit' && isAuditer)">
                                     <label for="address" class="form-label">ملاحظات المراجع *</label>
-                                    <textarea name="address" class="form-control" id="address" rows="5" required="required"
-                                        v-model="reviweNote"></textarea>
+                                    <textarea name="address" class="form-control" id="address" rows="5"
+                                        required="required" v-model="reviweNote"></textarea>
                                     <small style="color: red" v-if="v$.reviweNote.$error">
                                         {{ 'ملاحظاتك مطلوبة' }}
                                     </small>
@@ -53,8 +53,8 @@
                                 <div v-if="(question.status == 'audit' && isAuditer)">
                                     <div class="row form-group">
                                         <label for="address" class="form-label"> * التقييم المناسب </label>
-                                        <select class="form-select" data-trigger name="degree" id="degree" v-model="degree"
-                                            @change="setDegree($event)">
+                                        <select class="form-select" data-trigger name="degree" id="degree"
+                                            v-model="degree" @change="setDegree($event)">
                                             <option value="">اختر التقييم المناسب</option>
                                             <option value="96">امتياز</option>
                                             <option value="91">ممتاز</option>
@@ -65,7 +65,8 @@
                                         <small style="color: red" v-if="v$.degree.$error">
                                             {{ 'اختر التقييم المناسب' }}
                                         </small>
-                                        <div class="form-check form-check-inline form-checkbox form-checkbox-color mt-4">
+                                        <div
+                                            class="form-check form-check-inline form-checkbox form-checkbox-color mt-4">
                                             <input type="checkbox" class="form-check-input" id="rule3" ref="rule3"
                                                 :checked="rule1" @change="setRule3()">
                                             <label class="form-check-label" for="rule3">
@@ -74,30 +75,30 @@
                                         </div>
 
                                         <div class="col-md-3 form-group mt-3">
-                                            <input type="button" value="إضافة" class="btn btn-primary d-block w-100 mt-3 "
+                                            <input type="button" value="إضافة"
+                                                class="btn btn-primary d-block w-100 mt-3 "
                                                 @click="addDegree(question.id)" :disabled='!rule3' />
                                         </div>
                                     </div>
                                 </div>
                                 <iq-card v-if="(question.status == 'review' && isReviewer)">
-                                    <template v-slot:headerTitle>
-                                        <h4 class="card-title">عنوان</h4>
-                                    </template>
                                     <template v-slot:body>
                                         <div>
 
                                             <!-- ACCEPT -->
-                                            <input type="button" value="قبول" class="btn btn-primary d-block w-100 mt-3 "
-                                                @click="accept(question.id)" v-if="isReviewer" />
+                                            <input type="button" value="قبول"
+                                                class="btn btn-primary d-block w-100 mt-3 " @click="accept(question.id)"
+                                                v-if="isReviewer" />
                                             <!-- END ACCEPT -->
 
                                             <!-- RETARD -->
-                                            <input type="button" value="اعادة" class="btn btn-warning d-block mt-3 w-100"
-                                                v-if="!retard" @click="setRetard()" />
+                                            <input type="button" value="اعادة"
+                                                class="btn btn-warning d-block mt-3 w-100" v-if="!retard"
+                                                @click="setRetard()" />
                                             <div class="col-md-12 mb-3 form-group mt-2" v-if="retard">
                                                 <label for="retardNote" class="form-label">سبب الاعادة *</label>
-                                                <textarea name="retardNote" class="form-control" id="retardNote" rows="5"
-                                                    v-model=retardNote></textarea>
+                                                <textarea name="retardNote" class="form-control" id="retardNote"
+                                                    rows="5" v-model=retardNote></textarea>
                                                 <small style="color: red" v-if="v$.retardNote.$error">
                                                     {{ 'سبب الاعادة مطلوب' }}
                                                 </small>
@@ -183,6 +184,9 @@
                                 },
 
                             ]" />
+                            <input type="button" value="تراجع" v-if="isSuper" class="btn btn-danger d-block mt-3 w-100"
+                                @click="undoAccept(question.id)" />
+
                         </template>
                     </iq-card>
                 </div>
@@ -271,6 +275,7 @@ import questionServices from '@/API/EligibleServices/questionServices'
 import UserInfoService from '@/Services/userInfoService'
 import useVuelidate from "@vuelidate/core";
 import { required, requiredIf } from "@vuelidate/validators";
+import helper from "@/utilities/helper";
 
 export default {
     name: 'question',
@@ -324,7 +329,7 @@ export default {
         };
     },
     methods: {
-
+        helper,
         changeTab(value) {
             this.$emit('onNext', value)
         },
@@ -373,7 +378,7 @@ export default {
                                     })
                                     this.loader = false
                                     this.retard = false
-                                    //location.reload()
+                                    this.$emit('status-updated');
                                 })
                                 .catch(error => {
                                     console.log(error)
@@ -412,24 +417,19 @@ export default {
                     if (willDelete.isConfirmed) {
                         questionServices.acceptQuestion(id, 'accept')
                             .then(response => {
-                                swalWithBootstrapButtons.fire({
-                                    title: 'تم القبول',
-                                    text: 'تم قبول السؤال',
-                                    icon: 'success',
-                                    showClass: {
-                                        popup: 'animate__animated animate__zoomIn'
-                                    },
-                                    hideClass: {
-                                        popup: 'animate__animated animate__zoomOut'
-                                    }
-                                });
-                                location.reload()
+                                this.$emit('status-updated');
+                                helper.toggleToast(`تم قبول السؤال`, "success");
                             })
                             .catch(error => {
                                 console.log(error)
                             })
                     }
                 })
+        },
+        async undoAccept(thesis_id) {
+            const response = await questionServices.undoAccept(thesis_id);
+            helper.toggleToast(response, "success");
+            this.$emit('status-updated');
         },
         setDegree(e) {
             this.mark = e.target.value

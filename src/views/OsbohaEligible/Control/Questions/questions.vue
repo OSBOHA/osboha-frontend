@@ -43,7 +43,7 @@
                   <!-- fieldsets -->
                   <fieldset v-for="(question, index) in questions" :key="index"
                      :class="current == index + 1 ? 'd-block' : 'd-none'">
-                     <question :question="question" :userBook='userBook' :index='index' @onNext="changeTab"
+                     <question  @status-updated="handleStatusUpdated" :question="question" :userBook='userBook' :index='index' @onNext="changeTab"
                         :reviewStage="true" />
                   </fieldset>
                </form>
@@ -171,6 +171,10 @@ export default {
    },
 
    methods: {
+      handleStatusUpdated() {
+         this.getQuestions()
+      },
+
       async getQuestions() {
          const response = await questionServices.getByUserBook(this.$route.params.user_book_id);
          this.questions = response.questions;
