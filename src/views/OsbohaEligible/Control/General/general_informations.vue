@@ -22,7 +22,7 @@
                      <div class="row setup-content" id="user-detail">
                         <div class="col-sm-12">
                            <div class="col-md-12 p-0">
-                              <h3 class="mb-4">الانجاز</h3>
+                              <h3 class="mb-4">التوثيق</h3>
                               <div class="row">
 
                                  <div class="col-md-12 form-group">
@@ -104,7 +104,7 @@
                                                 الحصرية أو مشاكل أخرى مخالفة للقانون
                                              </h5>
                                              <!-- ACCEPT -->
-                                             <input type="button" value="انجاز صالح للتقييم"
+                                             <input type="button" value="توثيق صالح للتقييم"
                                                 class="btn btn-primary d-block w-100 mt-3 "
                                                 @click="accept(informations.id)" v-if="isReviewer" />
                                              <!-- END ACCEPT -->
@@ -134,7 +134,7 @@
                                              <!-- REJECT -->
                                              <div v-if="isSuper">
 
-                                                <input type="button" value="انجاز مرفوض"
+                                                <input type="button" value="توثيق مرفوض"
                                                    class="btn btn-danger d-block mt-3 w-100" @click="setReject()"
                                                    v-if="!reject" />
                                                 <div class="col-md-12 mb-3 form-group mt-2" v-if="reject">
@@ -151,7 +151,7 @@
                                                       </div>
                                                    </div>
 
-                                                   <input type="button" value="انجاز مرفوض"
+                                                   <input type="button" value="توثيق مرفوض"
                                                       class="btn btn-danger d-block mt-3 w-100"
                                                       @click="rejectInfo(informations.id)" />
                                                 </div>

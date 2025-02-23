@@ -264,7 +264,7 @@
                 <TimeLine :items="[
                   {
                     color: 'primary',
-                    title: `تم التقييم ~ ${generalInformations.auditor.name}`,
+                    title: `تم التقييم ~ ${generalInformations.auditor ? generalInformations.auditor.name : ''}`,
                     description: generalInformations.reviews,
                     child: {
                       type: 'img',
@@ -296,7 +296,7 @@
                 <TimeLine :items="[
                   {
                     color: 'primary',
-                    title: `مرفوض ~ ${generalInformations.reviewer.name} ${generalInformations.auditor.name}`,
+                    title: `مرفوض ~ ${generalInformations.reviewer ? generalInformations.reviewer.name : ''} ${generalInformations.auditor ? generalInformations.auditor.name : ''}`,
                     description: generalInformations.reviews,
                     child: {
                       type: 'img',
@@ -317,6 +317,28 @@
       </iq-card>
       <!-- End General Informations -->
 
+      <div class="row" v-if="userBook.status != 'rejected'">
+        <input type="button" value="رفض التوثيق" class="btn btn-danger m-auto d-block mt-3 w-75" @click="setReject()"
+          v-if="!reject" />
+        <div class="col-md-12 mb-3 form-group mt-2" v-if="reject">
+          <label for="rejectNote" class="form-label">سبب الرفض *</label>
+          <textarea name="rejectNote" class="form-control" id="rejectNote" rows="5" required="required"
+            v-model=rejectNote></textarea>
+          <small style="color: red" v-if="v$.rejectNote.$error">
+            {{ 'سبب الرفض مطلوب' }}
+          </small>
+          <div class="d-inline-block w-100 text-center">
+            <div class="col-sm-12 text-center" v-if="loader">
+              <img src="@/assets/images/gif/loader-3.gif" alt="loader" style="height: 100px;">
+            </div>
+          </div>
+
+          <input type="button" value="رفض التوثيق" class="btn btn-danger m-auto d-block mt-3 w-75"
+            @click="rejectUserBook()" />
+        </div>
+        <!-- END REJECT -->
+
+      </div>
     </div>
     <div class="col-sm-12" v-else-if="show == 0">
       <iq-card class="iq-card">
@@ -335,10 +357,16 @@
 import userBookService from "@/API/EligibleServices/userBookServices";
 import Thesis from "../Control/Thesis/thesis";
 import Question from '../Control/Questions/question'
+import { required, requiredIf } from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
 
 
 export default {
   name: "Find Achievements",
+
+  setup() {
+    return { v$: useVuelidate() };
+  },
   components: {
     Thesis,
     Question
@@ -359,11 +387,25 @@ export default {
       search: null,
       show: null,
       userBook: null,
+      reject: false,
+      rejectNote: '',
 
+    };
+  },
+  validations() {
+    return {
+      rejectNote: {
+        required: requiredIf(function (nestedModel) {
+          return this.reject == true;
+        }),
+      },
     };
   },
 
   methods: {
+    setReject() {
+      this.reject = true;
+    },
     listCertificate(id) {
       window.open(`https://platform.osboha180.com/backend/public/api/v1/eligible-certificates/generate-pdf/${id}`, '_blank');
     },
@@ -411,6 +453,57 @@ export default {
     changeQuestionsTab(tab) {
       this.currentQuestion = tab
       window.scrollTo({ behavior: 'smooth' })
+    },
+
+    rejectUserBook() {
+      this.v$.$touch();
+      if (!this.v$.rejectNote.$invalid) {
+        const swalWithBootstrapButtons = this.$swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-primary btn-lg',
+            cancelButton: 'btn btn-outline-primary btn-lg ms-2'
+          },
+          buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'هل أنت متأكد؟',
+          text: "موافقتك تعني رفض توثيق هذا السفير",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'نعم قم بالرفض',
+          cancelButtonText: 'تراجع  ',
+          showClass: {
+            popup: 'animate__animated animate__zoomIn'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__zoomOut'
+          }
+        })
+          .then((willDelete) => {
+            if (willDelete.isConfirmed) {
+              this.loader = true
+              userBookService.rejectRetardUserBook(this.userBook.id, this.rejectNote, 'rejected')
+                .then(response => {
+                  swalWithBootstrapButtons.fire({
+                    title: 'تم الرفض',
+                    text: 'تم رفض الانجاز',
+                    icon: 'success',
+                    showClass: {
+                      popup: 'animate__animated animate__zoomIn'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__zoomOut'
+                    }
+                  })
+                })
+                .catch(error => {
+                  console.log(error)
+                })
+                this.show = null
+              }
+          })
+      }
     },
   },
 };

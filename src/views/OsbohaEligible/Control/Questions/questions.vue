@@ -69,13 +69,13 @@
                      </h5>
 
                      <!-- ACCEPT -->
-                     <input type="button" value="انجاز صالح للتقييم" class="btn btn-primary d-block w-100 mt-3 "
+                     <input type="button" value="توثيق صالح للتقييم" class="btn btn-primary d-block w-100 mt-3 "
                         @click="accept()" :disabled='!isAccepted' v-if="isReviewer" />
                      <!-- END ACCEPT -->
                      <!-- REJECT -->
                      <div v-if="isSuper">
 
-                        <input type="button" value="انجاز مرفوض" class="btn btn-danger d-block mt-3 w-100"
+                        <input type="button" value="توثيق مرفوض" class="btn btn-danger d-block mt-3 w-100"
                            @click="setReject()" v-if="!reject" />
                         <div class="col-md-12 mb-3 form-group mt-2" v-if="reject">
                            <label for="rejectNote" class="form-label">سبب الرفض *</label>
@@ -89,7 +89,7 @@
                                  <img src="@/assets/images/gif/loader-3.gif" alt="loader" style="height: 100px;">
                               </div>
                            </div>
-                           <input type="button" value="انجاز مرفوض" class="btn btn-danger d-block mt-3 w-100"
+                           <input type="button" value="توثيق مرفوض" class="btn btn-danger d-block mt-3 w-100"
                               @click="rejectUserBook()" />
                         </div>
                      </div>
@@ -213,7 +213,7 @@ export default {
 
             swalWithBootstrapButtons.fire({
                title: 'هل أنت متأكد؟',
-               text: "موافقتك تعني رفض انجاز هذا السفير",
+               text: "موافقتك تعني رفض توثيق هذا السفير",
                icon: 'warning',
                showCancelButton: true,
                confirmButtonText: 'نعم قم بالرفض',
@@ -232,7 +232,7 @@ export default {
                         .then(response => {
                            swalWithBootstrapButtons.fire({
                               title: 'تم الرفض',
-                              text: 'تم رفض الانجاز',
+                              text: 'تم رفض التوثيق',
                               icon: 'success',
                               showClass: {
                                  popup: 'animate__animated animate__zoomIn'
@@ -261,7 +261,7 @@ export default {
          })
          swalWithBootstrapButtons.fire({
             title: 'هل أنت متأكد؟',
-            text: "موافقتك تعني قبول انجاز هذا السفير",
+            text: "موافقتك تعني قبول توثيق هذا السفير",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'نعم قم بالقبول',
@@ -279,7 +279,7 @@ export default {
                      .then(response => {
                         swalWithBootstrapButtons.fire({
                            title: 'تم القبول',
-                           text: 'تم قبول الانجاز',
+                           text: 'تم قبول التوثيق',
                            icon: 'success',
                            showClass: {
                               popup: 'animate__animated animate__zoomIn'
