@@ -172,8 +172,8 @@ export default {
         .fire({
           title: " رمضان شهر الفرص، وهذه فرصتك لتعيش تجربةً مختلفةّ مع فعاليات رمضان بمشروع أصبوحة 180",
           text: `تفضلوا بالانضمام إلينا في فعاليات أصبوحة الرمضانية، حيث نجتمع لننالَ وإيّاكم الأجر العظيم في الشهر الكريم. 🌙📚`,
-          imageUrl: require('@/assets/images/main/alertMsg.jpg'),
-          imageHeight: 200,
+          imageUrl: require('@/assets/images/ramadan/ramadan_slogan.png'),
+          imageHeight: 300,
           imageAlt: 'A tall image',
           showConfirmButton: true,
           showCancelButton: true,
