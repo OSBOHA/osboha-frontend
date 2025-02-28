@@ -14,7 +14,6 @@
           <option v-for="week in statistics.weeks" :key="week.id" :value="week.id">{{ week.title }}</option>
         </select>
       </div>
-
       <Marks :statistics="statistics.total_statistics" :week_title="this.statistics.week.title"
         :number_of_users="(statistics.users_in_group - statistics.total.freezed)" />
 

@@ -435,6 +435,13 @@ export const ACTIVITIES_STATUS = {
   rejected: "مرفوض",
 };
 
+export const ACTIVITIES_STATUS_CLASS = {
+  pending: "bg-warning",
+  accepted: "bg-success",
+  redo: "bg-warning",
+  rejected: "bg-danger",
+};
+
 export const BACK_READER_MESSAGES = {
   1: `ندرك جميعاً أن الظروف قد تكون صعبة في بعض الأحيان مما تضطرنا للانسحاب، ولكن تذكر أن هذه الفترات هي التي تبني فينا الإصرار والعزيمة 💪.
 

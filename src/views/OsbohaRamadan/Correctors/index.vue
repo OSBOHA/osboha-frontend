@@ -5,14 +5,14 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-6 col-md-6 col-lg-6" v-if="isHadithCorrector">
                     <router-link :to="{ name: 'ramadan.correctors-hadith-list', }">
-                        <img src="@/assets/images/ramadan/ramadan-2024_correct_hadiths.png" alt="ramadan-footer"
+                        <img src="@/assets/images/ramadan/ramadan-2025_correct_hadiths.png" alt="ramadan-footer"
                             class="img-fluid" />
                     </router-link>
                 </div>
 
                 <div class="col-6 col-md-6 col-lg-6" v-if="isQuestionCorrector">
                     <router-link :to="{ name: 'ramadan.correctors-questions-list', }">
-                        <img src="@/assets/images/ramadan/ramadan-2024_correct_questions.png" alt="ramadan-footer"
+                        <img src="@/assets/images/ramadan/ramadan-2025_correct_questions.png" alt="ramadan-footer"
                             class="img-fluid" />
                     </router-link>
                 </div>

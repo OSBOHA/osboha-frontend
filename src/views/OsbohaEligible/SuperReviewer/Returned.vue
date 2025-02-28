@@ -4,12 +4,12 @@
             <div class="card position-relative inner-page-bg bg-primary" style="height: 150px;">
                 <div class="inner-page-title">
                     <h3 class="text-white">التوثيقات المعادة</h3>
-                    <p class="text-white">العدد الكلي {{ retardsBooks.length }}</p>
+                    <!-- <p class="text-white">العدد الكلي {{ retardsBooks?.length }}</p> -->
                 </div>
             </div>
         </div>
 
-        <iq-card v-if="retardsBooks.length > 0">
+        <iq-card v-if="retardsBooks">
             <template v-slot:body>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped table-bordered">
@@ -103,7 +103,7 @@ export default {
     },
     data() {
         return {
-            retardsBooks: [],
+            retardsBooks: null,
         }
     },
     methods: {

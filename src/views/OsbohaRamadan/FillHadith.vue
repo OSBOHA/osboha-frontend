@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ramadan-view">
     <ramadanHeader />
 
     <div class="col-sm-12 mt-3" v-if="hadith">
@@ -14,15 +14,15 @@
         </h2>
         <div v-if="isHadithActive" class="text-center">
           <img :src="imagePath(hadith.image)" alt="ramadan-footer" class="img-fluid p-2" v-if="(!form.hadith_1 && !form.hadith_2) ||
-      (!form.hadith_redo && (hadith.memorization.length > 0 && !hadith.memorization.status == 'pending')) ||
-      isAccepted
-      " />
+            (!form.hadith_redo && (hadith.memorization.length > 0 && !hadith.memorization.status == 'pending')) ||
+            isAccepted
+          " />
           <img src="@/assets/images/ramadan/night-prayer.png" alt="ramadan-footer" class="img-fluid" v-else />
 
           <p class="ramada-p h5 text-center mt-2 p-2" v-if="(!form.hadith_1 && !form.hadith_2) ||
-      (!form.hadith_redo && (hadith.memorization.length > 0 && !hadith.memorization.status == 'pending')) ||
-      isAccepted
-      ">
+            (!form.hadith_redo && (hadith.memorization.length > 0 && !hadith.memorization.status == 'pending')) ||
+            isAccepted
+          ">
             {{ hadith.hadith }}
           </p>
           <div class="col-12 pt-2">
@@ -71,9 +71,10 @@
               </p>
               <p>حالة اجابتك</p>
               {{ hadith.memorization[0].reviews }}
-              <small class="badge bg-success">{{
-      ACTIVITIES_STATUS[hadith.memorization[0].status]
-    }}</small>
+              <small class="badge" :class="` ${ACTIVITIES_STATUS_CLASS[hadith.memorization[0].status]}`">
+                {{
+                  ACTIVITIES_STATUS[hadith.memorization[0].status]
+                }}</small>
 
               <form class="mt-2" @submit.prevent="onSubmit()" v-if="hadith.memorization[0].status == 'redo'">
                 <div class="form-group">
@@ -178,7 +179,7 @@ import { required, requiredIf, sameAs } from "@vuelidate/validators";
 import ramadanHeader from "@/components/ramadan/ramadan-header";
 import helper from "@/utilities/helper";
 import statisticsHeader from "@/components/ramadan/statistics-header";
-import { ACTIVITIES_STATUS } from "@/utilities/constants";
+import { ACTIVITIES_STATUS, ACTIVITIES_STATUS_CLASS } from "@/utilities/constants";
 import HadithServices from "@/API/RamadanServices/hadith.service";
 import HadithMemorizationServices from "@/API/RamadanServices/hadithMemorization.service";
 import ramadanDaysService from "@/API/RamadanServices/ramadanDays.service";
@@ -213,6 +214,7 @@ export default {
     return {
       loader: false,
       ACTIVITIES_STATUS,
+      ACTIVITIES_STATUS_CLASS,
       statistics: [],
       current_day: null,
       hadith: null,
@@ -341,20 +343,22 @@ export default {
   src: url('@/assets/fonts/HacenSamra.ttf');
 }
 
-h1,
+.ramadan-view h1,
 h2,
+h3,
 h4,
 h5,
+h6,
 p {
   font-family: HacenSamra, Arial, sans-serif;
-  color: #471809;
+  color: #203C42;
 }
 
 .ramada-p {
   font-size: 25px;
   line-height: 40px;
   font-family: HacenSamra, Arial, sans-serif;
-  color: #471809;
+  color: #203C42;
 }
 
 .ramadan-card {
@@ -371,22 +375,23 @@ p {
 }
 
 .statistics-card {
-  background: #FDEEEC;
+  background: #e6f9ea;
   border-top: none;
-  border-right: solid #471809;
-  border-bottom: solid #471809;
-  border-left: solid #471809;
+  border-right: solid #203C42;
+  border-bottom: solid #203C42;
+  border-left: solid #203C42;
 }
 
 .ramadan-btn {
-  background: #b17658;
-  color: #f8f9fa;
+  background: #b1d8c3;
+  color: #203C42;
 
 }
 
+
 .back-btn {
   font-family: HacenSamra, Arial, sans-serif;
-  color: #471809;
+  color: #203C42;
 }
 
 .accepted {
@@ -507,7 +512,7 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-  color: #471809;
+  color: #203C42;
 }
 
 #progressbar li {

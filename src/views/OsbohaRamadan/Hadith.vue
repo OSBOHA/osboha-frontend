@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ramadan-view">
         <ramadanHeader />
 
         <div class="col-sm-12 mt-3">
@@ -90,18 +90,20 @@ export default {
     src: url('@/assets/fonts/HacenSamra.ttf');
 }
 
-h1,
+.ramadan-view h1,
 h2,
+h3,
 h4,
 h5,
+h6,
 p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramada-p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramadan-card {
@@ -118,22 +120,22 @@ p {
 }
 
 .statistics-card {
-    background: #FDEEEC;
+    background: #e6f9ea;
     border-top: none;
-    border-right: solid #471809;
-    border-bottom: solid #471809;
-    border-left: solid #471809;
+    border-right: solid #203C42;
+    border-bottom: solid #203C42;
+    border-left: solid #203C42;
 }
 
 .ramadan-btn {
-    background: #b17658;
-    color: #f8f9fa;
+    background: #b1d8c3;
+    color: #203C42;
 
 }
 
 .back-btn {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .accepted {
@@ -254,7 +256,7 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-    color: #471809;
+    color: #203C42;
 }
 
 #progressbar li {

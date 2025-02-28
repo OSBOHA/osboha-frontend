@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item static-item">
     <a class="nav-link static-item disabled" tabindex="-1">
-      <span class="default-icon">رمضان</span>
+      <span class="default-icon">رمضان أصبوحة</span>
       <span class="mini-icon" data-bs-toggle="tooltip" title="Social" data-bs-placement="right">-</span>
     </a>
   </li>
@@ -10,8 +10,8 @@
     <router-link :class="checkActive('ramadan.index') ? 'active nav-link' : 'nav-link'" aria-current="page" :to="{
       name: 'ramadan.index',
     }">
-      <i class="icon material-symbols-outlined"> clear_night </i>
-      <span class="item-name">فعاليات رمضان</span>
+            <img src="@/assets/images/ramadan/ramadan_slogan.png" class="img-fluid rounded w-25" alt="blog-img" />
+            <span class="item-name">فعاليات رمضان</span>
     </router-link>
   </li>
   <!-- ###### ADD COORRECTORS  ###### -->

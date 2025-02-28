@@ -9,11 +9,7 @@
   <div class="main-content">
     <div class="position-relative">
       <template v-for="(option, index) in breadcrumboptions" :key="index">
-        <breadcrumb
-          :img="option.img"
-          :title="option.title"
-          v-show="this.$route.meta.name === option.title"
-        />
+        <breadcrumb :img="option.img" :title="option.title" v-show="this.$route.meta.name === option.title" />
       </template>
     </div>
     <div id="content-page" class="content-page">
@@ -30,13 +26,12 @@
     <!-- <DefaultRightSidebar/> -->
 
     <div v-if="sessionData">
-      <CurrentReading :book_in_progress="sessionData.book_in_progress" :progress="sessionData.progress" id="quick_access" />
+      <Ramadan/>
+      <CurrentReading :book_in_progress="sessionData.book_in_progress" :progress="sessionData.progress"
+        id="quick_access" />
       <ReadingTeam :reading_team="sessionData.reading_team" :parent="sessionData.parent" />
       <Timer :timer="sessionData.timer" />
-      <LastException
-        :lastException="sessionData.last_exception"
-        v-if="sessionData.last_exception"
-      />
+      <LastException :lastException="sessionData.last_exception" v-if="sessionData.last_exception" />
     </div>
   </div>
 </template>
@@ -45,6 +40,7 @@ import DefaultSidebar from "../components/custom/partials/Sidebar/DefaultSidebar
 import DefaultHeader from "../components/custom/partials/Header/DefaultHeader";
 import DefaultFooter from "../components/custom/partials/Footer/DefaultFooter";
 import CurrentReading from "@/components/custom/partials/Sidebar/LeftSidebar/CurrentReading";
+import Ramadan from "@/components/custom/partials/Sidebar/LeftSidebar/Ramadan";
 import ReadingTeam from "@/components/custom/partials/Sidebar/LeftSidebar/ReadingTeam";
 import Timer from "@/components/custom/partials/Sidebar/LeftSidebar/Timer.vue";
 import LastException from "@/components/custom/partials/Sidebar/LeftSidebar/LastException";
@@ -68,6 +64,7 @@ export default {
     Timer,
     LastException,
     CurrentReading,
+    Ramadan,
     ReadingTeam,
     Breadcrumb,
   },

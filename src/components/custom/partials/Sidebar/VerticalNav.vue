@@ -82,6 +82,8 @@
         <span class="item-name">أطروحة الجمعة</span>
       </router-link>
     </li>
+    <!-- ###### Osboha Ramadan ###### -->
+    <OsbohaRamadan />
 
     <!-- ###### Books ###### -->
     <Books />
@@ -101,9 +103,6 @@
 
     <!-- ###### Osboha  Withdrawn Ambassadors ###### -->
     <OsbohaWithdrawnAmbassadors v-if="inWithdrawnsTeam" />
-
-    <!-- ###### Osboha Ramadan ###### -->
-    <!-- <OsbohaRamadan /> -->
 
     <!-- ###### Audit Marks ###### -->
     <AuditMarks v-if="isAdvisor || isSupervisor" />
@@ -143,7 +142,7 @@ import OsbohaSpecialCare from './OsbohaSpecialCare'
 import OsbohaWithdrawnAmbassadors from './OsbohaWithdrawnAmbassadors';
 import OsbohaSupport from './OsbohaSupport';
 import Books from './Books';
-// import OsbohaRamadan from "./OsbohaRamadan";
+import OsbohaRamadan from "./OsbohaRamadan";
 import vClickOutside from "click-outside-vue3";
 
 export default {
@@ -163,7 +162,7 @@ export default {
     OsbohaWithdrawnAmbassadors,
     OsbohaSupport,
     Books,
-    // OsbohaRamadan
+    OsbohaRamadan
   },
   computed: {
     user() {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ramadan-view">
         <ramadanHeader />
 
         <div class="col-sm-12 mt-3">
@@ -93,19 +93,19 @@
                         <h4 class="text-center">
                             عدد الذين أتموا عدد (5) أيام قيام الليل معنا حتى اللحظة
                             <p class=" ramada-p text-center display-3"> {{ statistics.distinct_users_5_night ?
-                    statistics.distinct_users_5_night : 0 }}</p>
+                                statistics.distinct_users_5_night : 0 }}</p>
                         </h4>
 
                         <h4 class="text-center">
                             عدد الذين أتموا عدد (10) أيام قيام الليل معنا حتى اللحظة
                             <p class=" ramada-p text-center display-3"> {{ statistics.distinct_users_10_night ?
-                    statistics.distinct_users_10_night : 0 }}</p>
+                                statistics.distinct_users_10_night : 0 }}</p>
                         </h4>
 
                         <h4 class="text-center">
                             عدد الذين أتموا عدد (20) أيام قيام الليل معنا حتى اللحظة
                             <p class=" ramada-p text-center display-3"> {{ statistics.distinct_users_20_night ?
-                    statistics.distinct_users_20_night : 0 }}</p>
+                                statistics.distinct_users_20_night : 0 }}</p>
                         </h4>
                         <hr>
                         <div class="row">
@@ -113,7 +113,7 @@
                                 نقاطك لـ ({{ form.ramadan_day_id }}) رمضان
                                 <p class=" ramada-p text-center display-3">
                                     {{ statistics.auth_specific_ramadan_day_points ?
-                    statistics.auth_specific_ramadan_day_points : 0 }}</p>
+                                        statistics.auth_specific_ramadan_day_points : 0 }}</p>
                             </h5>
                             <h5 class="text-center col-6">
                                 أتممت قيام
@@ -238,7 +238,7 @@ export default {
     computed: {
         isDisabled() {
             if (this.current_day) {
-                return this.form.ramadan_day_id > this.current_day.day
+                return this.form.ramadan_day_id > this.current_day.id
                 //return this.form.ramadan_day_id != this.current_day.day
             }
             else {
@@ -256,18 +256,20 @@ export default {
     src: url('@/assets/fonts/HacenSamra.ttf');
 }
 
-h1,
+.ramadan-view h1,
 h2,
+h3,
 h4,
 h5,
+h6,
 p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramada-p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramadan-card {
@@ -284,22 +286,23 @@ p {
 }
 
 .statistics-card {
-    background: #FDEEEC;
+    background: #e6f9ea;
     border-top: none;
-    border-right: solid #471809;
-    border-bottom: solid #471809;
-    border-left: solid #471809;
+    border-right: solid #203C42;
+    border-bottom: solid #203C42;
+    border-left: solid #203C42;
 }
 
 .ramadan-btn {
-    background: #b17658;
-    color: #f8f9fa;
+    background: #b1d8c3;
+    color: #203C42;
 
 }
 
+
 .back-btn {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .accepted {
@@ -420,7 +423,7 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-    color: #471809;
+    color: #203C42;
 }
 
 #progressbar li {

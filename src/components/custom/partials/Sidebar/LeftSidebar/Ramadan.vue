@@ -67,37 +67,37 @@ export default {
         {
           route_to: "book.ramadan",
           title: "الكتب الرمضانية",
-          image: require("@/assets/images/ramadan/ramadan-2024_books.png")
+          image: require("@/assets/images/ramadan/ramadan-2025_books.png")
         },
         {
           route_to: "ramadan.quran",
           title: "وِرد القرآن الكريم",
-          image: require("@/assets/images/ramadan/ramadan-2024-03.png")
+          image: require("@/assets/images/ramadan/ramadan-2025-03.png")
         },
         {
           route_to: "ramadan.night-prayer",
           title: "قيام الليل",
-          image: require("@/assets/images/ramadan/ramadan-2024-02.png")
+          image: require("@/assets/images/ramadan/ramadan-2025-02.png")
         },
         {
           route_to: "ramadan.hadith",
           title: "مسابقة الحديث الشريف",
-          image: require("@/assets/images/ramadan/ramadan-2024-01.png")
+          image: require("@/assets/images/ramadan/ramadan-2025-01.png")
         },
         {
           route_to: "ramadan.questions",
           title: "اسئلة رمضان",
-          image: require("@/assets/images/ramadan/ramadan-2024-04.png")
+          image: require("@/assets/images/ramadan/ramadan-2025-04.png")
         },
         {
           route_to: "ramadan.golden-day",
           title: "اليوم الذهبي",
-          image: require("@/assets/images/ramadan/ramadan-2024-05.png")
+          image: require("@/assets/images/ramadan/ramadan-2025-05.png")
         },
         {
           route_to: "ramadan.telegram-channels",
           title: "قنوات أصبوحة الرمضانية",
-          image: require("@/assets/images/ramadan/ramadan-2024_telegram.png")
+          image: require("@/assets/images/ramadan/ramadan-2025_telegram.png")
         }
       ],
 
@@ -140,7 +140,7 @@ export default {
 
 .toggel-btn {
   margin-right: -3.5rem !important;
-  background-color: #FCD2BE;
+  background-color: #b1d8c3;
 }
 
 .carousel-btn {
@@ -148,8 +148,8 @@ export default {
 }
 
 .ramadan-btn {
-  background: #b17658;
-  color: #f8f9fa;
+  background: #b1d8c3;
+  color: #203C42;
 
 }
 </style>

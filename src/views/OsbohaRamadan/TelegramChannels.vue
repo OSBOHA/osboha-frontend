@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ramadan-view">
         <ramadanHeader />
         <div class="col-12">
             <div class="row d-flex justify-content-center">
@@ -7,7 +7,8 @@
                     :key="index">
                     <img src="@/assets/images/ramadan/channel.png" alt="ramadan-footer" class="img-fluid w-50" />
                     <h5 class="text-center mt-1" style="direction: rtl;"> {{ channel.title }}</h5>
-                    <a :href="channel.link" class="btn ramadan-btn mt-3" target="_blank"> عرض</a>
+                    <p class="text-center">{{ channel.sub_title }}</p>
+                    <a :href="channel.link" class="btn ramadan-btn" target="_blank"> عرض</a>
                 </div>
             </div>
             <div class="d-inline-block w-100 text-center col-12">
@@ -24,7 +25,6 @@
 </template>
 
 <script>
-import UserInfoService from "@/Services/userInfoService";
 import ramadanHeader from "@/components/ramadan/ramadan-header";
 // import ramadanFooter from "@/components/ramadan/ramadan-footer";
 
@@ -41,26 +41,15 @@ export default {
             channels: [
 
                 {
-                    title: 'القناة العامة لفعاليات رمضان 2024 🌙',
-                    link: 'https://t.me/+pbCNw32w5FM5MGRk'
+                    title: 'فعاليات رمضان 2025 || أصبوحة 180 📚🌙',
+                    sub_title: '~ المجموعة الأولى ~',
+                    link: 'https://chat.whatsapp.com/FTcQty4FyY9DJ7HykXw99B'
                 },
                 {
-                    title: 'مسابقات فعاليات رمضان 2024 🌙',
-                    link: 'https://t.me/+LrHqHmN3_cMxYjNk',
+                    title: 'فعاليات رمضان 2025 || أصبوحة 180 📚🌙',
+                    sub_title: '~ المجموعة الثانية ~',
+                    link: 'https://chat.whatsapp.com/FPHEsLX6doBFnwgiG2pq4d',
                 },
-                {
-                    title: 'قيام الليل مع أصبوحة 180 | فعاليات رمضان 2024 🌙💚',
-                    link: 'https://t.me/+t2kSUWWwl3BjZDFk'
-                },
-                {
-                    title: 'حفظ الحديث الشريف | فعاليات رمضان مع أصبوحة 180 🌙💚',
-                    link: 'https://t.me/+NzO2sIQ_48Y3NzNk'
-                },
-                {
-                    title: 'الورد القرآني اليومي | رمضان 2024 🌙💚',
-                    link: 'https://t.me/+hjubbUbkpvxjZTRk'
-                },
-
             ]
         };
     },
@@ -75,6 +64,38 @@ export default {
 
 </script>
 
-<style>
-@import './css/ramadan.css';
+<style scoped>
+@font-face {
+    font-family: HacenSamra;
+    src: url('@/assets/fonts/HacenSamra.ttf');
+}
+
+.ramadan-view h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: HacenSamra, Arial, sans-serif;
+    color: #203C42;
+}
+
+.ramada-p {
+    font-family: HacenSamra, Arial, sans-serif;
+    color: #203C42;
+}
+
+
+.ramadan-btn {
+    background: #b1d8c3;
+    color: #203C42;
+
+}
+
+
+.back-btn {
+    font-family: HacenSamra, Arial, sans-serif;
+    color: #203C42;
+}
 </style>

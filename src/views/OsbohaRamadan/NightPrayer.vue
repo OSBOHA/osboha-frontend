@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ramadan-view">
         <ramadanHeader />
 
         <div class="col-sm-12 mt-3">
@@ -11,12 +11,16 @@
                 <div class="col-12 pt-2 text-center">
                     <div class="row">
                         <div class="col-6 col-md-6 col-lg-6" v-for="day in 30" :key="day">
-                            <router-link :to="{ name: 'ramadan.fill-night-prayer', params: { day: day } }"
-                                :class="` ${!inDays(day) ? 'disabled-link' : ''}`">
+                            <router-link v-if="foundDays(day) !== 0"
+                                :to="{ name: 'ramadan.fill-night-prayer', params: { day: foundDays(day) } }"
+                                :class="` ${!foundDays(day) ? 'disabled-link' : ''}`">
                                 <img :src="imagePath(day)" alt="night_prayer" class="img-fluid" />
                                 <h4 class="text-center">{{ day }}</h4>
-
                             </router-link>
+                            <span v-else class="disabled-link">
+                                <img :src="imagePath(day)" alt="night_prayer" class="img-fluid" />
+                                <h4 class="text-center">{{ day }}</h4>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -55,6 +59,16 @@ export default {
             days: []
         };
     },
+    computed: {
+        foundDays() {
+            const mappedDays = this.days.reduce((acc, item) => {
+                acc[item.day] = item.id;
+                return acc;
+            }, {});
+
+            return (day) => mappedDays[day] || 0;
+        }
+    },
     methods: {
         inDays(value) {
             return Object.values(this.days).some(item => item.day === value)
@@ -75,18 +89,20 @@ export default {
     src: url('@/assets/fonts/HacenSamra.ttf');
 }
 
-h1,
+.ramadan-view h1,
 h2,
+h3,
 h4,
 h5,
+h6,
 p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramada-p {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .ramadan-card {
@@ -103,22 +119,23 @@ p {
 }
 
 .statistics-card {
-    background: #FDEEEC;
+    background: #e6f9ea;
     border-top: none;
-    border-right: solid #471809;
-    border-bottom: solid #471809;
-    border-left: solid #471809;
+    border-right: solid #203C42;
+    border-bottom: solid #203C42;
+    border-left: solid #203C42;
 }
 
 .ramadan-btn {
-    background: #b17658;
-    color: #f8f9fa;
+    background: #b1d8c3;
+    color: #203C42;
 
 }
 
+
 .back-btn {
     font-family: HacenSamra, Arial, sans-serif;
-    color: #471809;
+    color: #203C42;
 }
 
 .accepted {
@@ -239,7 +256,7 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-    color: #471809;
+    color: #203C42;
 }
 
 #progressbar li {
