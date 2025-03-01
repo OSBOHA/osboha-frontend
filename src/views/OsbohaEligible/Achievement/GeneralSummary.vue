@@ -5,7 +5,8 @@
                 <div class="iq-card-body profile-page p-0">
                     <div class="p-0 text-center">
                         <video class="w-75" controls preload="metadata">
-                            <source src="@/assets/videos/eligible_videos/general_informations.mp4#t=5.0" type="video/mp4">
+                            <source src="@/assets/videos/eligible_videos/general_informations.mp4#t=5.0"
+                                type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -95,14 +96,15 @@
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <h4 class="form-label"> التلخيص العام</h4>
-                                                    <p class="form-control-plaintext">{{ generalInformations.summary }}
+                                                    <p class="form-control-plaintext pre-rtl">{{
+                                                        generalInformations.summary }}
                                                     </p>
                                                 </div>
                                                 <hr />
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12 form-group">
                                                         <h4 class="form-label"> السؤال العام </h4>
-                                                        <p class="form-control-plaintext">{{
+                                                        <p class="form-control-plaintext pre-rtl">{{
                                                             generalInformations.general_question }}</p>
                                                     </div>
 
@@ -138,11 +140,20 @@
                                                         <div class="form-group">
                                                             <label class="form-label" for="bookGeneralIdea">الفكرة
                                                                 العامة</label>
-                                                            <textarea v-model="v$.generalInfromationsform.summary.$model"
+                                                            <textarea
+                                                                v-model="v$.generalInfromationsform.summary.$model"
                                                                 rows="5"
                                                                 placeholder="... اكتب الملخص العام عدد حروفه بين 350 و 4800"
                                                                 class="rounded form-control"
                                                                 id="bookGeneralIdea"></textarea>
+
+                                                            <p class="text-end" style="direction: rtl">
+                                                                <span>
+                                                                    {{ v$.generalInfromationsform.summary.$model.length }}/4800
+                                                                    حرف
+                                                                </span>
+                                                            </p>
+
                                                             <small style="color:red;"
                                                                 v-if="v$.generalInfromationsform.summary.$error">
                                                                 لطفًا قم بكتابة تلخيص عدد حروفه بين 350 و 4800 خالي من
@@ -158,6 +169,15 @@
                                                                 placeholder="...  اكتب هنا السؤال العام الذي يسعى هذا الكتاب لإجابته لا يزيد عدد حروفة عن 250"
                                                                 class="rounded form-control"
                                                                 id="bookGeneralQuestion"></textarea>
+                                                            <p class="text-end" style="direction: rtl">
+                                                                <span>
+                                                                    {{
+                                                                    v$.generalInfromationsform.general_question.$model.length
+                                                                    }}/250
+                                                                    حرف
+                                                                </span>
+                                                            </p>
+
                                                             <small style="color:red;"
                                                                 v-if="v$.generalInfromationsform.general_question.$error">
                                                                 قم بكتابة سؤال عام لا يزيد عدد حروفة عن 250

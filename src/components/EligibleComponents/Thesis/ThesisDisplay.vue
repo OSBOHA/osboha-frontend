@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <p>
+                    <p class="pre-rtl">
                         {{ thesis.thesis_text }}
                     </p>
                 </div>
@@ -106,7 +106,7 @@ export default {
     methods: {
         resolve_img_url: function (image) {
             const url = `https://platform.osboha180.com/backend/public/api/v1/thesises/image?path=${image.path}`
- 
+
             return url;
         },
         deleteThesis(id) {
@@ -159,10 +159,10 @@ export default {
         UpdateThesis(id) {
             this.show = !this.show;
             this.$router.push({ path: `/thesis-review/update/${id}` })
- 
+
         },openPhoto(image){
               const url = `https://platform.osboha180.com/backend/public/api/v1/thesises/image?path=${image.path}`
- 
+
             window.open(url, '_blank')
         }
 

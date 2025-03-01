@@ -20,19 +20,10 @@
       <iq-card class="iq-card">
         <div class="iq-card-body p-0">
           <div class="user-tabing">
-            <tab-nav
-              :pills="true"
-              id="pills-tab"
-              class="nav nav-pills d-flex align-items-center justify-content-center profile-feed-items p-0 m-0"
-            >
-              <tab-nav-items
-                class="w-100 p-0"
-                :active="true"
-                id="pills-feed-tab"
-                ariaControls="pills-home"
-                :ariaSelected="true"
-                title="المرحلة الثالثة - الاسئلة المعرفية"
-              />
+            <tab-nav :pills="true" id="pills-tab"
+              class="nav nav-pills d-flex align-items-center justify-content-center profile-feed-items p-0 m-0">
+              <tab-nav-items class="w-100 p-0" :active="true" id="pills-feed-tab" ariaControls="pills-home"
+                :ariaSelected="true" title="المرحلة الثالثة - الاسئلة المعرفية" />
             </tab-nav>
           </div>
         </div>
@@ -41,25 +32,17 @@
     <div class="col-sm-12">
       <div class="tab-content">
         <!-- START QUESTIONS -->
-        <tab-content-item
-          :active="true"
-          id="questions_container"
-          aria-labelled-by="pills-feed-tab"
-        >
+        <tab-content-item :active="true" id="questions_container" aria-labelled-by="pills-feed-tab">
           <div class="iq-card-body p-0">
             <div class="row">
               <div class="col-12">
                 <div id="post-modal-data" class="iq-card">
                   <div>
-                    <iq-card
-                      id="post-modal-data"
-                      v-if="
-                        (questions.length < 12 && auditable) ||
-                        questions.length == 0 ||
-                        questions.length < 5
-                      "
-                      body-class="iq-card iq-card-block iq-card-stretch iq-card-height"
-                    >
+                    <iq-card id="post-modal-data" v-if="
+                      (questions.length < 12 && auditable) ||
+                      questions.length == 0 ||
+                      questions.length < 5
+                    " body-class="iq-card iq-card-block iq-card-stretch iq-card-height">
                       <template v-slot:headerTitle>
                         <h4 class="card-title">
                           إضافة الأسئلة المعرفية وإجاباتها
@@ -68,11 +51,7 @@
                       <template v-slot:body>
                         <div class="d-flex align-items-center">
                           <div class="d-flex align-items-center mt-3 w-100">
-                            <form
-                              v-if="book"
-                              @submit.prevent="submitQuestionForm"
-                              class="post-text ml-3 w-100 row"
-                            >
+                            <form v-if="book" @submit.prevent="submitQuestionForm" class="post-text ml-3 w-100 row">
                               <div class="form-group col-12">
                                 <small style="color: red">
                                   * فضلاً يتوجب عليك إرفاق عدد (5) من الأسئلة
@@ -82,73 +61,49 @@
                                 </small>
                               </div>
                               <div class="form-group col-6">
-                                <select
-                                  v-model="v$.questionForm.starting_page.$model"
-                                  class="form-select"
-                                  data-trigger
-                                  name="choices-single-default"
-                                  id="choices-single-default"
-                                >
+                                <select v-model="v$.questionForm.starting_page.$model" class="form-select" data-trigger
+                                  name="choices-single-default" id="choices-single-default">
                                   <option value="">اختر صفحة البداية</option>
-                                  <option
-                                    v-for="(i, index) in book.end_page"
-                                    :key="index"
-                                    :value="i"
-                                  >
+                                  <option v-for="(i, index) in book.end_page" :key="index" :value="i">
                                     {{ i }}
                                   </option>
                                 </select>
-                                <small
-                                  style="color: red"
-                                  v-if="v$.questionForm.starting_page.$error"
-                                  >{{
-                                    pageError
-                                      ? pageError
-                                      : "الرجاء قم بادخال صفحة البداية"
-                                  }}</small
-                                >
+                                <small style="color: red" v-if="v$.questionForm.starting_page.$error">{{
+                                  pageError
+                                    ? pageError
+                                    : "الرجاء قم بادخال صفحة البداية"
+                                }}</small>
                               </div>
                               <div class="form-group col-6">
-                                <select
-                                  class="form-select"
-                                  v-model="v$.questionForm.ending_page.$model"
-                                  data-trigger
-                                  name="choices-single-default"
-                                  id="choices-single-default"
-                                >
+                                <select class="form-select" v-model="v$.questionForm.ending_page.$model" data-trigger
+                                  name="choices-single-default" id="choices-single-default">
                                   <option value="">اختر صفحة النهاية</option>
-                                  <option
-                                    v-for="(i, index) in book.end_page"
-                                    :key="index"
-                                    :value="i"
-                                  >
+                                  <option v-for="(i, index) in book.end_page" :key="index" :value="i">
                                     {{ i }}
                                   </option>
                                 </select>
-                                <small
-                                  style="color: red"
-                                  v-if="v$.questionForm.ending_page.$error"
-                                  >{{
-                                    pageError
-                                      ? pageError
-                                      : ` الرجاء قم بادخال صفحة
+                                <small style="color: red" v-if="v$.questionForm.ending_page.$error">{{
+                                  pageError
+                                    ? pageError
+                                    : ` الرجاء قم بادخال صفحة
                                   النهاية`
-                                  }}</small
-                                >
+                                }}</small>
                               </div>
                               <div class="form-group">
-                                <textarea
-                                  rows="5"
+                                <textarea rows="5"
                                   placeholder=" اكتب سؤالًا  عدد حروفه بين 10 و 250 تجيب عنه الصفحات التي حددتها أعلاه، سنبحث عن إجابة السؤال ضمن هذه الصفحات فقط لتوثيق قراءتك"
-                                  class="rounded form-control"
-                                  id="bookQuestion"
-                                  @change="resetInsertSuccessfully()"
-                                  v-model="v$.questionForm.question.$model"
-                                ></textarea>
-                                <small
-                                  style="color: red"
-                                  v-if="v$.questionForm.question.$error"
-                                >
+                                  class="rounded form-control" id="bookQuestion" @change="resetInsertSuccessfully()"
+                                  v-model="v$.questionForm.question.$model"></textarea>
+                                <p class="text-end" style="direction: rtl">
+                                  <span>
+                                    {{
+                                      v$.questionForm.question.$model.length
+                                    }}/250
+                                    حرف
+                                  </span>
+                                </p>
+
+                                <small style="color: red" v-if="v$.questionForm.question.$error">
                                   لطفًا قم بكتابة سؤال عدد حروفه بين 10 و 250
                                   خالي من الرموز التعبيرية (emojis)
                                 </small>
@@ -161,35 +116,28 @@
                                   كحد أقصى تجيب فيه عن السؤال بأسلوبك.
                                 </small>
 
-                                <div
-                                  class="form-group row"
-                                  v-for="(v, index) in questionForm.quotes"
-                                  :key="index"
-                                >
-                                  <textarea
-                                    rows="5"
+                                <div class="form-group row" v-for="(v, index) in questionForm.quotes" :key="index">
+                                  <textarea rows="5"
                                     placeholder="اكتب لنا إجابة السؤال الذي ذكرت أعلاه بأسلوبك عدد حروفها لا يزيد عن 250، سنقوم بتفقد الصفحات المحددة أعلاه لنراجع مدى دقة الإجابة التي قدمت للسؤال"
-                                    class="rounded form-control mt-2"
-                                    id="bookQuote"
-                                    v-model="v.text"
-                                    style="width: 90%"
-                                  >
+                                    class="rounded form-control mt-2" id="bookQuote" v-model="v.text"
+                                    style="width: 90%">
                                   </textarea>
+                                  <p class="text-end" style="direction: rtl">
+                                    <span>
+                                      {{
+                                        v.text.length
+                                      }}/250
+                                      حرف
+                                    </span>
+                                  </p>
                                 </div>
-                                <small
-                                  style="color: red"
-                                  v-if="v$.questionForm.quotes.$error"
-                                >
+                                <small style="color: red" v-if="v$.questionForm.quotes.$error">
                                   قم بادخال إجابة واحدة على الاقل عدد حروفها لا
                                   يزيد عن 250 خالية من الرموز التعبيرية (emojis)
                                 </small>
                               </div>
-                              <input
-                                type="submit"
-                                value="أضافة"
-                                href="javascript:void(0);"
-                                class="btn btn-primary d-block mt-3"
-                              />
+                              <input type="submit" value="أضافة" href="javascript:void(0);"
+                                class="btn btn-primary d-block mt-3" />
                             </form>
                           </div>
                         </div>
@@ -198,11 +146,7 @@
                     </iq-card>
                   </div>
                 </div>
-                <alert
-                  v-if="insertSuccessful"
-                  variant="primary"
-                  className="d-flex align-items-center text-center"
-                >
+                <alert v-if="insertSuccessful" variant="primary" className="d-flex align-items-center text-center">
                   <template v-slot>
                     <div>
                       <h5 class="card-title">تمت الاضافة بنجاح</h5>
@@ -217,31 +161,17 @@
                   <template v-slot:body>
                     <form id="form-wizard1" class="text-center mt-3">
                       <ul id="top-tab-list" class="p-0 row list-inline">
-                        <li
-                          v-for="(question, index) in questions"
-                          :key="index"
-                          :class="checkActive(index, index + 1)"
-                          class="col-2 mb-2 text-start"
-                          @click="changeTab(index + 1)"
-                          id="account"
-                        >
+                        <li v-for="(question, index) in questions" :key="index" :class="checkActive(index, index + 1)"
+                          class="col-2 mb-2 text-start" @click="changeTab(index + 1)" id="account">
                           <a href="javascript:void(0);">
                             <span> {{ index + 1 }}</span>
                           </a>
                         </li>
                       </ul>
                       <!-- fieldsets -->
-                      <fieldset
-                        v-for="(question, index) in questions"
-                        :key="index"
-                        :class="current == index + 1 ? 'd-block' : 'd-none'"
-                      >
-                        <ListQuestion
-                          :question="question"
-                          :index="index"
-                          :book="book"
-                          :user_book="user_book"
-                        />
+                      <fieldset v-for="(question, index) in questions" :key="index"
+                        :class="current == index + 1 ? 'd-block' : 'd-none'">
+                        <ListQuestion :question="question" :index="index" :book="book" :user_book="user_book" />
                       </fieldset>
                     </form>
                   </template>
@@ -250,17 +180,11 @@
                 <div class="col-lg-12">
                   <iq-card>
                     <template v-slot:body>
-                      <button
-                        class="btn btn-primary d-block w-100 mb-3"
-                        @click="reviewQuestions"
-                        v-if="questions.length >= 5 && auditable"
-                      >
+                      <button class="btn btn-primary d-block w-100 mb-3" @click="reviewQuestions"
+                        v-if="questions.length >= 5 && auditable">
                         اعتماد
                       </button>
-                      <button
-                        class="btn btn-success d-block w-100"
-                        @click="back()"
-                      >
+                      <button class="btn btn-success d-block w-100" @click="back()">
                         عودة لصفحة الانجاز
                       </button>
                     </template>

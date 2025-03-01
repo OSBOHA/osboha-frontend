@@ -28,14 +28,14 @@
                                  <div class="col-md-12 form-group">
                                     <div class="col-md-12 form-group">
                                        <h4 class="form-label"> التلخيص العام</h4>
-                                       <p class="form-control-plaintext">{{ informations.summary }}</p>
+                                       <p class="form-control-plaintext pre-rtl">{{ informations.summary }}</p>
                                     </div>
 
                                  </div>
                                  <div class="col-md-12 form-group">
                                     <div class="col-md-12 form-group">
                                        <h4 class="form-label"> السؤال العام العام</h4>
-                                       <p class="form-control-plaintext">{{ informations.general_question }}</p>
+                                       <p class="form-control-plaintext pre-rtl">{{ informations.general_question }}</p>
                                     </div>
 
                                  </div>

@@ -19,7 +19,8 @@
                             <div class="col-md-12 form-group">
                                 <div class="col-md-12 form-group">
                                     <label for="emailid" class="form-label"> الاطروحة</label>
-                                    <p class="form-control-plaintext">{{ thesis.thesis_text }}</p>
+                                    <p class="form-control-plaintext pre-rtl" >{{
+                                        thesis.thesis_text }}</p>
                                 </div>
                             </div>
                             <div v-if="reviewStage">

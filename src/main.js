@@ -5,6 +5,8 @@ import router from "./router";
 import store from "./store";
 import "./plugins";
 
+import "@/assets/css/special_style.css";
+
 import VueSweetalert2 from "vue-sweetalert2";
 import VueApexCharts from "vue3-apexcharts";
 import BootstrapVue3 from "bootstrap-vue-3";

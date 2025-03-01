@@ -12,12 +12,12 @@
           <div class="mb-3">
             <div class="d-flex justify-content-between mt-2 text-dark">
               <h6>المعدل العام</h6>
-              <small>{{ getAverage(statistics.team_out_of_100 / number_of_users) }}%</small>
+              <small>{{ getAverage(week_avg) }}%</small>
             </div>
             <b-progress class="shadow-none w-100 mt-2" style="height: 6px">
               <progressbar className="bg-primary" :style="{
-                width: getAverage(statistics.team_out_of_100 / number_of_users) + '%',
-              }" :aria-valuenow="getAverage(statistics.team_out_of_100 / number_of_users)" :aria-valuemin="0" :aria-valuemax="100">
+                width: getAverage(week_avg) + '%',
+              }" :aria-valuenow="getAverage(week_avg)" :aria-valuemin="0" :aria-valuemax="100">
               </progressbar>
             </b-progress>
           </div>
@@ -107,7 +107,10 @@ export default {
     number_of_users: {
       type: [Number],
       required: true,
-
+    },
+    week_avg:{
+      type: [Number],
+      required: true,
     }
   },
   methods: {

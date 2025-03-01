@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <p>
+                    <p class="pre-rtl">
                         {{ stuff.thesis_text }}
                         {{ stuff.stuff }}
                     </p>
@@ -57,7 +57,7 @@
                     <ul>
                         <li v-for="qoute in stuff.qoutes" :key="qoute.id" class="mt-3">
 
-                            <p>
+                            <p class="pre-rtl">
                                 {{ qoute }}
                             </p>
                         </li>
@@ -121,7 +121,7 @@ export default {
         resolve_img_url: function (path) {
               const url = `https://platform.osboha180.com/backend/public/api/v1/thesises/image?path=${image.path}`
               console.log(url)
-         
+
             return url;
         },
         deleteThesis(id) {

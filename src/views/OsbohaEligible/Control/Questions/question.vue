@@ -19,14 +19,14 @@
                             <div class="col-md-12 form-group">
                                 <div class="col-md-12 form-group">
                                     <label for="emailid" class="form-label"> السؤال</label>
-                                    <p class="form-control-plaintext">{{ question.question }}</p>
+                                    <p class="form-control-plaintext pre-rtl">{{ question.question }}</p>
                                 </div>
                                 <div class="user-post">
                                     <div class="col-md-12 form-group">
                                         <label for="emailid" class="form-label"> الاقتباسات</label>
                                         <ul v-if="question.quotation.length > 0">
                                             <li v-for="qoute in question.quotation" :key="qoute.id" class="mt-3">
-                                                <p>
+                                                <p class="pre-rtl">
                                                     {{ qoute.text }}
                                                 </p>
                                             </li>

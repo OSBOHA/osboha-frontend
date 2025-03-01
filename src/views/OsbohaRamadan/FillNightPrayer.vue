@@ -7,7 +7,7 @@
                 <div class="iq-card-header-toolbar d-flex text-center align-items-center mx-auto ramadan-card">
                     <h1 class="text-center mt-3 mb-3">قيام الليل</h1>
                 </div>
-                <h2 class="text-center mt-1 mb-3">{{ form.ramadan_day_id }} ~ رمضان </h2>
+                <h2 class="text-center mt-1 mb-3" v-if="ramadan_day"> {{ ramadan_day.day }} ~ رمضان </h2>
                 <img src="@/assets/images/ramadan/night-prayer.png" alt="ramadan-footer" class="img-fluid" />
 
                 <p class="ramada-p h5 text-center">
@@ -109,8 +109,8 @@
                         </h4>
                         <hr>
                         <div class="row">
-                            <h5 class="text-center col-6">
-                                نقاطك لـ ({{ form.ramadan_day_id }}) رمضان
+                            <h5 class="text-center col-6" v-if="ramadan_day">
+                                نقاطك لـ ({{ ramadan_day.day }}) رمضان
                                 <p class=" ramada-p text-center display-3">
                                     {{ statistics.auth_specific_ramadan_day_points ?
                                         statistics.auth_specific_ramadan_day_points : 0 }}</p>
@@ -159,11 +159,13 @@ export default {
     async created() {
         this.current_day = await ramadanDaysService.current();
         const response = await nightPrayerServices.show(this.form.ramadan_day_id);
-        this.setForm(response);
+        this.setForm(response.night_pray);
+        this.ramadan_day = response.day;
     },
     data() {
         return {
             current_day: null,
+            ramadan_day: null,
             loader: false,
             statistics: [],
             form: {
@@ -239,7 +241,6 @@ export default {
         isDisabled() {
             if (this.current_day) {
                 return this.form.ramadan_day_id > this.current_day.id
-                //return this.form.ramadan_day_id != this.current_day.day
             }
             else {
                 return false;

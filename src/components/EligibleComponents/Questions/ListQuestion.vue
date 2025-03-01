@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <p>
+                    <p class="pre-rtl">
                         {{ question.question }}
                     </p>
                 </div>
@@ -67,7 +67,7 @@
                         <label for="emailid" class="form-label"> إجابة السؤال</label>
                         <ul>
                             <li v-for="qoute in question.quotation" :key="qoute.id" class="mt-3">
-                                <p>
+                                <p class="pre-rtl">
                                     {{ qoute.text }}
                                 </p>
                             </li>
@@ -163,7 +163,7 @@ export default {
     },
 }
 </script>
-    
+
 <style>
 .dropdown-item {
     color: #212529 !important;
@@ -175,4 +175,3 @@ export default {
     color: var(--iq-primary) !important;
 }
 </style>
-    

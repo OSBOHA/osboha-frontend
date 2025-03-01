@@ -1,51 +1,24 @@
 <template>
   <div>
-    <iq-card
-      id="post-modal-data"
-      body-class="iq-card iq-card-block iq-card-stretch iq-card-height"
-    >
+    <iq-card id="post-modal-data" body-class="iq-card iq-card-block iq-card-stretch iq-card-height">
       <template v-slot:body>
         <div class="d-flex align-items-center">
-          <form
-            @submit.prevent="submitUpdate"
-            class="post-text ml-3 w-100 row"
-            v-if="book"
-          >
+          <form @submit.prevent="submitUpdate" class="post-text ml-3 w-100 row" v-if="book">
             <div class="form-group col-6">
-              <select
-                class="form-select"
-                data-trigger
-                name="choices-single-default"
-                id="choices-single-default"
-                v-model="v$.updateForm.pageStart.$model"
-              >
+              <select class="form-select" data-trigger name="choices-single-default" id="choices-single-default"
+                v-model="v$.updateForm.pageStart.$model">
                 <option value="">اختر صفحة البداية</option>
-                <option
-                  v-for="(i, index) in book.end_page"
-                  :key="index"
-                  :value="i"
-                >
+                <option v-for="(i, index) in book.end_page" :key="index" :value="i">
                   {{ i }}
                 </option>
               </select>
-              <small style="color: red" v-if="v$.updateForm.pageStart.$error"
-                >الرجاء قم بادخال صفحة البداية</small
-              >
+              <small style="color: red" v-if="v$.updateForm.pageStart.$error">الرجاء قم بادخال صفحة البداية</small>
             </div>
             <div class="form-group col-6">
-              <select
-                class="form-select"
-                data-trigger
-                name="choices-single-default"
-                id="choices-single-default"
-                v-model="v$.updateForm.pageEnd.$error"
-              >
+              <select class="form-select" data-trigger name="choices-single-default" id="choices-single-default"
+                v-model="v$.updateForm.pageEnd.$error">
                 <option value="">اختر صفحة النهاية</option>
-                <option
-                  v-for="(i, index) in book.end_page"
-                  :key="index"
-                  :value="i"
-                >
+                <option v-for="(i, index) in book.end_page" :key="index" :value="i">
                   {{ i }}
                 </option>
               </select>
@@ -55,13 +28,17 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="thesisBody">الأطروحة</label>
-              <textarea
-                rows="5"
-                placeholder="... اكتب أطروحتك"
-                class="rounded form-control"
-                id="thesisBody"
-                v-model="v$.updateForm.text.$model"
-              ></textarea>
+              <textarea rows="5" placeholder="... اكتب أطروحتك" class="rounded form-control" id="thesisBody"
+                v-model="v$.updateForm.text.$model"></textarea>
+              <p class="text-end" style="direction: rtl">
+                <span>
+                  {{
+                    v$.updateForm.text.length
+                  }}/4800
+                  حرف
+                </span>
+              </p>
+
               <p style="color: red" v-if="v$.updateForm.text.$error">
                 لطفًا قم بكتابة اطروحة عدد حروفها بين 500 و 4800 خالية من الرموز
                 التعبيرية (emojis)
@@ -69,27 +46,11 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="customFile"
-                >صورة من مجموعة السفراء</label
-              >
-              <input
-                class="form-control"
-                type="file"
-                id="customFile"
-                ref="file"
-                @change="uploadFile"
-                multiple
-              />
-              <small style="color: red" v-if="v$.updateForm.file.$error"
-                >الرجاء قم برفع صورة او صورتين</small
-              >
+              <label class="form-label" for="customFile">صورة من مجموعة السفراء</label>
+              <input class="form-control" type="file" id="customFile" ref="file" @change="uploadFile" multiple />
+              <small style="color: red" v-if="v$.updateForm.file.$error">الرجاء قم برفع صورة او صورتين</small>
             </div>
-            <input
-              type="submit"
-              value="تعديل"
-              href="javascript:void(0);"
-              class="btn btn-primary d-block mt-3"
-            />
+            <input type="submit" value="تعديل" href="javascript:void(0);" class="btn btn-primary d-block mt-3" />
           </form>
         </div>
         <hr />
@@ -173,7 +134,7 @@ export default {
     validatePages() {
       const error =
         parseInt(this.thesis.pageStart) < parseInt(this.thesis.pageEnd);
-      
+
       if (!error)
         this.pageError = "يجب ان تكون صفحة البداية اقل من صفحة النهاية";
       else this.pageError = "";

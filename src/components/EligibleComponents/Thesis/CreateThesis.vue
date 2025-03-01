@@ -1,46 +1,28 @@
 <template>
   <div>
-    <iq-card
-      id="post-modal-data"
-      body-class="iq-card iq-card-block iq-card-stretch iq-card-height"
-    >
+    <iq-card id="post-modal-data" body-class="iq-card iq-card-block iq-card-stretch iq-card-height">
       <template v-slot:headerTitle>
         <h4 class="card-title">إضافة الأطروحة {{ noOfthesis + 1 }}</h4>
       </template>
       <template v-slot:body>
         <div class="d-flex align-items-center">
-          <form
-            @submit.prevent="submit"
-            class="post-text ml-3 w-100 row"
-            v-if="book"
-          >
+          <form @submit.prevent="submit" class="post-text ml-3 w-100 row" v-if="book">
             <!--Start page-->
             <div class="form-group col-6">
-              <select
-                class="form-select"
-                data-trigger
-                name="choices-single-default"
-                id="choices-single-default"
-                v-model="v$.thesis.pageStart.$model"
-              >
+              <select class="form-select" data-trigger name="choices-single-default" id="choices-single-default"
+                v-model="v$.thesis.pageStart.$model">
                 <option value="">اختر صفحة البداية</option>
                 <option v-for="page in pages" :key="page" :value="page">
                   {{ page }}
                 </option>
               </select>
               <div class="help-block" v-if="v$.thesis.pageStart.$error">
-                <small
-                  style="color: red"
-                  v-if="v$.thesis.pageStart.required.$invalid"
-                  >الرجاء اختيار صفحة البداية</small
-                >
-                <small
-                  style="color: red"
-                  v-if="
-                    !v$.thesis.pageStart.required.$invalid &&
-                    v$.thesis.pageStart.between.$invalid
-                  "
-                >
+                <small style="color: red" v-if="v$.thesis.pageStart.required.$invalid">الرجاء اختيار صفحة
+                  البداية</small>
+                <small style="color: red" v-if="
+                  !v$.thesis.pageStart.required.$invalid &&
+                  v$.thesis.pageStart.between.$invalid
+                ">
                   صفحة البداية يجب ان تكون اقل من صفحة النهاية
                 </small>
               </div>
@@ -48,31 +30,19 @@
 
             <!--End page-->
             <div class="form-group col-6">
-              <select
-                class="form-select"
-                data-trigger
-                name="choices-single-default"
-                id="choices-single-default"
-                v-model="v$.thesis.pageEnd.$model"
-              >
+              <select class="form-select" data-trigger name="choices-single-default" id="choices-single-default"
+                v-model="v$.thesis.pageEnd.$model">
                 <option value="">اختر صفحة النهاية</option>
                 <option v-for="page in bookPagesEnd" :key="page" :value="page">
                   {{ page }}
                 </option>
               </select>
               <div class="help-block" v-if="v$.thesis.pageEnd.$error">
-                <small
-                  style="color: red"
-                  v-if="v$.thesis.pageEnd.required.$invalid"
-                  >الرجاء اختيار صفحة النهاية</small
-                >
-                <small
-                  style="color: red"
-                  v-if="
-                    !v$.thesis.pageEnd.required.$invalid &&
-                    v$.thesis.pageEnd.between.$invalid
-                  "
-                >
+                <small style="color: red" v-if="v$.thesis.pageEnd.required.$invalid">الرجاء اختيار صفحة النهاية</small>
+                <small style="color: red" v-if="
+                  !v$.thesis.pageEnd.required.$invalid &&
+                  v$.thesis.pageEnd.between.$invalid
+                ">
                   صفحة النهاية يجب ان تكون اكبر من صفحة البداية
                 </small>
               </div>
@@ -81,13 +51,17 @@
             <!--Thesis body-->
             <div class="form-group">
               <label class="form-label" for="thesisBody">الأطروحة</label>
-              <textarea
-                rows="5"
-                placeholder="... اكتب أطروحة عدد حروفها بين 500 و 4800"
-                class="rounded form-control"
-                id="thesisBody"
-                v-model="v$.thesis.text.$model"
-              ></textarea>
+              <textarea rows="5" placeholder="... اكتب أطروحة عدد حروفها بين 500 و 4800" class="rounded form-control"
+                id="thesisBody" v-model="v$.thesis.text.$model"></textarea>
+              <p class="text-end" style="direction: rtl">
+                <span>
+                  {{
+                    v$.thesis.text.$model.length
+                  }}/4800
+                  حرف
+                </span>
+              </p>
+
               <p style="color: red" v-if="v$.thesis.text.$error">
                 لطفًا قم بكتابة اطروحة عدد حروفها بين 500 و 4800 خالية من الرموز
                 التعبيرية (emojis)
@@ -106,12 +80,7 @@
             </div>
 
             <!--Submit button-->
-            <input
-              type="submit"
-              value="إضافة"
-              href="javascript:void(0);"
-              class="btn btn-primary d-block mt-3"
-            />
+            <input type="submit" value="إضافة" href="javascript:void(0);" class="btn btn-primary d-block mt-3" />
           </form>
         </div>
         <hr />
