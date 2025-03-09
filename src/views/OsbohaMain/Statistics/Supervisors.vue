@@ -25,6 +25,14 @@
             </div>
 
             <div class="card-body" v-if="supervisorFollowupTeams">
+                <div class="form-group mt-3">
+                    <select class="form-select" v-model="week_id">
+                        <option value="-1">اختر الأسبوع</option>
+                        <option v-for="week in weeks" :key="week.id" :value="week.id">{{ week.title }}
+                        </option>
+                    </select>
+                </div>
+
                 <h3>
                     الأفرقة الرقابية
                     <span role="button" class="material-symbols-outlined" v-if="!showSupervisorFollowupTeams"
@@ -286,19 +294,34 @@
 </template>
 <script>
 import StatisticsService from "@/API/services/statistics.service";
+import WeeksService from "@/API/services/week.service";
 import FollowupTeamsStatistics from "@/components/statistics/FollowupTeams";
 import MembersReading from "@/components/statistics/MembersReading";
+import { watchEffect } from "vue";
 
 export default {
     name: 'Supervisor Statistics',
     async created() {
-        this.loding = true;
-        const response = await StatisticsService.supervisorsStatistics(this.$route.params.advisor_id);
-        this.ownFollowupTeams = response.supervisor_own_followup_team;
-        this.supervisorFollowupTeams = response.supervisor_followup_teams
-        this.supervisorsReading = response.supervisors_reading;
-        this.advisorGroup = response.advisor_group;
-        this.loding = false;
+        this.weeks = await WeeksService.getWeeks(10);
+        const week = await WeeksService.getPreviousWeek();
+        this.week_id = week.id
+
+        watchEffect(async () => {
+            if (this.week_id) {
+                this.loding = true;
+                this.supervisorsReading = null;
+                this.ownFollowupTeams = null;
+                this.supervisorFollowupTeams = null;
+                this.advisorGroup = null;
+                const response = await StatisticsService.supervisorsStatistics(this.$route.params.advisor_id, this.week_id);
+                this.ownFollowupTeams = response.supervisor_own_followup_team;
+                this.supervisorFollowupTeams = response.supervisor_followup_teams
+                this.supervisorsReading = response.supervisors_reading;
+                this.advisorGroup = response.advisor_group;
+                this.loding = false;
+            }
+        });
+
 
     },
     components: {
@@ -307,8 +330,10 @@ export default {
     },
     data() {
         return {
+            weeks: null,
             statistics: null,
             supervisorsReading: null,
+            week_id: null,
             advisorGroup: null,
             ownFollowupTeams: null,
             supervisorFollowupTeams: null,
