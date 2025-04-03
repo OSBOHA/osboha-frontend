@@ -18,7 +18,7 @@
 
                 <div class="col-12 pt-2">
                     <h4 class="mb-2 p-2">
-                        {{ memorizedHadith.user.name }}
+                        {{ memorizedHadith.user.name + " " + memorizedHadith.user.last_name }}
                         <small class="badge" :class="` ${ACTIVITIES_STATUS_CLASS[memorizedHadith.status]}`">
                             {{ ACTIVITIES_STATUS[memorizedHadith.status] }}
                         </small>

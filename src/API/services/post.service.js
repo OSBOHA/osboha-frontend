@@ -133,6 +133,15 @@ class PostService {
     }
   }
 
+  async contolVotes(post_id) {
+    try {
+      const response = await api.patch(`/posts/${post_id}/control-votes`);
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
   async pinPost(post_id) {
     try {
       const response = await api.patch(`/posts/pin/${post_id}`);

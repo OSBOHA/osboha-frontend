@@ -19,8 +19,13 @@
               <label for="bookName">اسم الكتاب</label>
               <input type="text" v-model="v$.bookForm.name.$model" class="form-control mb-0" id="bookName"
                 placeholder=" اسم الكتاب" />
-              <small style="color: red" v-if="v$.bookForm.name.$error">
-                اسم الكتاب مطلوب</small>
+              <small style="color: red" v-if="v$.bookForm.name.required.$invalid">
+                اسم الكتاب مطلوب
+              </small>
+
+              <small style="color: red" v-else-if="v$.bookForm.name.maxLength.$invalid">
+                اسم الكتاب يجب أن لا يتجاوز 191 حرفًا
+              </small>
             </div>
 
             <!-- Brief -->
@@ -58,7 +63,17 @@
               <label for="bookLink">رابط الكتاب</label>
               <input type="text" v-model="v$.bookForm.link.$model" class="form-control mb-0" id="bookLink"
                 placeholder="رابط الكتاب " />
-              <small style="color: red" v-if="v$.bookForm.link.$error">رابط الكتاب مطلوب</small>
+              <small style="color: red" v-if="v$.bookForm.link.required.$invalid">
+                رابط الكتاب مطلوب
+              </small>
+
+              <small style="color: red" v-else-if="v$.bookForm.link.maxLength.$invalid">
+                رابط الكتاب يجب أن لا يتجاوز 2000 حرف
+              </small>
+
+              <small style="color: red" v-else-if="v$.bookForm.link.url.$invalid">
+                الرجاء إدخال رابط صحيح
+              </small>
             </div>
 
             <!-- Start Page -->
@@ -175,7 +190,7 @@
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, requiredIf, minLength, maxLength } from "@vuelidate/validators";
+import { required, requiredIf, maxLength, url } from "@vuelidate/validators";
 import bookService from "@/API/services/book.service";
 import bookType from "@/API/services/book-type.service";
 import languages from "@/API/services/language.service";
@@ -276,6 +291,7 @@ export default {
       bookForm: {
         name: {
           required,
+          maxLength: maxLength(191)
         },
         writer: {
           required: requiredIf(function () {
@@ -308,6 +324,8 @@ export default {
             else
               return false;
           }),
+          maxLength: maxLength(2000),
+          url
         },
         start_page: {
           required,

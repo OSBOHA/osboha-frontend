@@ -34,7 +34,7 @@
 
                 <div class="col-12 pt-2">
                     <h4 class="mb-2 p-2">
-                        {{ answer.user.name }}
+                        {{ answer.user.name + " " + answer.user.last_name }}
                         <small class="badge" :class="` ${ACTIVITIES_STATUS_CLASS[answer.status]}`">
                             {{ ACTIVITIES_STATUS[answer.status] }}
                         </small>

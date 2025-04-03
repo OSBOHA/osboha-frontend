@@ -30,7 +30,7 @@
                                         </small>
                                     </td>
                                     <td>
-                                        {{ answer.user.name }}
+                                        {{ answer.user.name + " " + answer.user.last_name }}
                                     </td>
                                     <td>
                                         <router-link

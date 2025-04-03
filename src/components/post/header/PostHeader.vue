@@ -48,6 +48,12 @@
             </span>
             {{ post.allow_comments ? "إغلاق" : "فتح" }} التعليقات
           </a>
+          <a class="dropdown-item d-flex align-items-center text-primary" href="#" @click.prevent="closeVotes"><span
+              class="material-symbols-outlined me-2 md-18">
+              {{ post.allow_votes ? "toggle_off" : "toggle_on" }}
+            </span>
+            {{ post.allow_votes ? "إغلاق" : "فتح" }} التصويت
+          </a>
           <a class="dropdown-item d-flex align-items-center" href="#" role="button" :aria-disabled="deleteLoading"
             @click.prevent="deletePost"><span class="material-symbols-outlined me-2 md-18"> delete </span>حذف</a>
           <a class="dropdown-item d-flex align-items-center" href="#" @click.prevent="show = false"><span
@@ -116,6 +122,19 @@ export default {
         this.toggleToast("حدث خطأ ما, حاول مرة أخرى", "error");
       }
     },
+    async closeVotes() {
+      try {
+        await PostService.contolVotes(this.post.id);
+        // this.closePostComments(this.post.id);
+
+        if (this.post.allow_votes)
+          this.toggleToast("تم فتح التصويت", "success");
+        else this.toggleToast("تم إغلاق التصويت", "success");
+      } catch (error) {
+        this.toggleToast("حدث خطأ ما, حاول مرة أخرى", "error");
+      }
+    },
+
     async pin() {
       try {
         const response = await PostService.pinPost(this.post.id);
