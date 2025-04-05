@@ -87,10 +87,19 @@ export default {
   async created() {
     this.current_marathon = await OsbohaMarathon.getCurrentMarathon();
     if (this.current_marathon) {
-      this.setMarathonForm.marathon_id = this.current_marathon.id
-    }
-    this.next_weeks = await WeekService.getNextWeekTitles(6);
+      if(this.current_marathon.marathon_weeks.length>0){
+        const first_week_in_current =this.current_marathon.marathon_weeks[0].week;
+        this.next_weeks = await WeekService.getWeeksAroundTitle(first_week_in_current.title);
 
+      }
+      else{
+        this.next_weeks = await WeekService.getNextWeekTitles(6);
+      }
+      this.setMarathonForm.marathon_id = this.current_marathon.id;
+    }
+    else{
+      this.next_weeks = await WeekService.getNextWeekTitles(6);
+    }
   },
 
   data() {

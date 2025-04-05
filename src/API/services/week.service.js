@@ -24,6 +24,16 @@ class Week {
       handleError(error);
     }
   }
+  async getWeeksAroundTitle(targetTitle, before = 2, after = 10) {
+    try {
+      const response = await api.get(
+        `${this.prefix}/weeks-around/${targetTitle}/${before}/${after}`,
+      );
+      return response.data.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
   async getPreviousWeek() {
     try {
       const response = await api.get(`${this.prefix}/get-previous-week`);
