@@ -1,23 +1,12 @@
 <template>
   <div>
     <ChatHeader :unreadMessages="unreadMessages" />
-    <modal
-      ref="newMessageModalRef"
-      id="newMessageModal"
-      tabindex="-1"
-      aria-labelledby="newMessageModalLabel"
-      :aria-hidden="true"
-      dialogClass="modal-md modal-dialog-centered modal-dialog-scrollable"
-      style="height: 95%; padding-top: 9%"
-    >
+    <modal ref="newMessageModalRef" id="newMessageModal" tabindex="-1" aria-labelledby="newMessageModalLabel"
+      :aria-hidden="true" dialogClass="modal-md modal-dialog-centered modal-dialog-scrollable"
+      style="height: 95%; padding-top: 9%">
       <model-header>
         <h4>رسالة جديدة</h4>
-        <a
-          href="javascript:void(0);"
-          class="lh-1"
-          ref="commentModalCloseBtn"
-          @click="closeModal"
-        >
+        <a href="javascript:void(0);" class="lh-1" ref="commentModalCloseBtn" @click="closeModal">
           <span class="material-symbols-outlined">close</span>
         </a>
       </model-header>
@@ -29,20 +18,9 @@
               <span class="material-symbols-outlined"> search </span>
             </div>
 
-            <input
-              type="text"
-              class="form-control"
-              placeholder="إلى:"
-              @input="searchUsers"
-              v-model="searchQuery"
-            />
+            <input type="text" class="form-control" placeholder="إلى:" @input="searchUsers" v-model="searchQuery" />
 
-            <button
-              class="btn close-icon"
-              type="button"
-              v-if="searchQuery.length > 0"
-              @click="clearSearch"
-            >
+            <button class="btn close-icon" type="button" v-if="searchQuery.length > 0" @click="clearSearch">
               <span class="material-symbols-outlined"> close </span>
             </button>
           </div>
@@ -51,29 +29,12 @@
             <div v-if="showEmpty" class="dropdown-list-item">
               <span>لا يوجد نتائج</span>
             </div>
-            <div
-              class="text-center justify-content-center dropdown-list-item"
-              v-if="fetchingUsers"
-            >
-              <img
-                src="@/assets/images/gif/page-load-loader.gif"
-                alt="loader"
-                style="height: 50px"
-              />
+            <div class="text-center justify-content-center dropdown-list-item" v-if="fetchingUsers">
+              <img src="@/assets/images/gif/page-load-loader.gif" alt="loader" style="height: 50px" />
             </div>
-            <div
-              class="dropdown-list-item"
-              v-for="user in users"
-              :key="user.id"
-              @click="openNewRoom(user)"
-            >
-              <BaseAvatar
-                :profileImg="user?.profile.profile_picture"
-                :profile_id="user?.profile.id"
-                :title="user?.name"
-                :gender="user?.gender"
-                avatarClass="rounded-circle avatar-40"
-              />
+            <div class="dropdown-list-item" v-for="user in users" :key="user.id" @click="openNewRoom(user)">
+              <BaseAvatar :profileImg="user?.profile.profile_picture" :profile_id="user?.profile.id" :title="user?.name"
+                :gender="user?.gender" avatarClass="rounded-circle avatar-40" />
               <span class="me-2">{{ user.name }}</span>
             </div>
           </div>
@@ -81,26 +42,13 @@
       </model-body>
     </modal>
 
-    <vue-advanced-chat
-      dir="ltr"
-      height="calc(100vh - 20px)"
-      :current-user-id="currentUserId"
-      :rooms="rooms"
-      :room-id="currentRoomId"
-      :loading-rooms="roomsLoading"
-      :rooms-loaded="roomsLoaded"
-      :messages="messages"
-      :messages-loaded="messagesLoaded"
-      :show-audio="false"
-      :show-reaction-emojis="false"
-      :message-actions="JSON.stringify(messageActions)"
-      :load-first-room="true"
-      @fetch-messages="fetchMessages($event.detail[0])"
-      @send-message="sendMessage($event.detail[0])"
-      @delete-message="deleteMessage($event.detail[0])"
-      @add-room="addRoom($event.detail[0])"
-      @open-file="openFile($event.detail[0])"
-    />
+    <vue-advanced-chat dir="ltr" height="calc(100vh - 20px)" :current-user-id="currentUserId" :rooms="rooms"
+      :room-id="currentRoomId" :loading-rooms="roomsLoading" :rooms-loaded="roomsLoaded" :messages="messages"
+      :messages-loaded="messagesLoaded" :show-audio="false" :show-reaction-emojis="false"
+      :message-actions="JSON.stringify(messageActions)" :load-first-room="true"
+      @fetch-messages="fetchMessages($event.detail[0])" @send-message="sendMessage($event.detail[0])"
+      @delete-message="deleteMessage($event.detail[0])" @add-room="addRoom($event.detail[0])"
+      @open-file="openFile($event.detail[0])" />
     <!-- @fetch-more-rooms="fetchMoreRooms" -->
   </div>
 </template>
@@ -127,13 +75,13 @@ export default {
     //open a new room if user_id is passed in the query params
     const queryParams = this.$route.query;
     if (queryParams.user_id) {
-      console.log("queryParams", queryParams.user_id);
+      // console.log("queryParams", queryParams.user_id);
       this.loadUserRoom(queryParams.user_id);
     } else {
-      console.log("queryParams not found before");
+      // console.log("queryParams not found before");
 
       this.selectedRoom = this.rooms[0];
-      console.log("queryParams not found after");
+      // console.log("queryParams not found after");
     }
   },
 
@@ -150,7 +98,7 @@ export default {
     });
 
     watchEffect(() => {
-      console.log("selectedRoom before", this.selectedRoom);
+      // console.log("selectedRoom before", this.selectedRoom);
       // Subscribe to the 'chat' channel
       if (this.selectedRoom) {
         if (this.selectedRoom.roomId != this.currentRoomId) {
@@ -169,7 +117,7 @@ export default {
         });
       }
 
-      console.log("selectedRoom after", this.selectedRoom);
+      // console.log("selectedRoom after", this.selectedRoom);
     });
   },
   watch: {
@@ -177,7 +125,7 @@ export default {
       this.newMessageModalRef.hide();
     },
     selectedRoom(newVal, old) {
-      console.log("selectedRoom OldVal", old, "selectedRoom newVal", newVal);
+      // console.log("selectedRoom OldVal", old, "selectedRoom newVal", newVal);
 
       // const user = newVal.users.find((user) => user.id !== this.currentUserId);
       // this.$router.push({
@@ -186,10 +134,10 @@ export default {
       //   },
       // });
 
-      console.log("Route param", this.$route.query.user_id);
+      // console.log("Route param", this.$route.query.user_id);
     },
     currentRoomId(newVal, old) {
-      console.log("currentRoomId OldVal", old, "currentRoomId newVal", newVal);
+      // console.log("currentRoomId OldVal", old, "currentRoomId newVal", newVal);
     },
   },
   data() {
@@ -295,7 +243,7 @@ export default {
     },
 
     fetchMessages({ room, options = {} }) {
-      console.log("fetchMessages room", room);
+      // console.log("fetchMessages room", room);
       if (Object.keys(room).length === 0) return;
 
       this.options = options;
@@ -308,9 +256,9 @@ export default {
         return;
       }
 
-      console.log("fetchMessages before");
+      // console.log("fetchMessages before");
       this.selectedRoom = room;
-      console.log("fetchMessages after");
+      // console.log("fetchMessages after");
 
       if (room?.isFake) {
         this.messagesLoaded = true;
@@ -379,9 +327,9 @@ export default {
         this.rooms[roomIndex] = newRoom;
         this.rooms = [...this.rooms];
 
-        console.log("sendMessage before");
+        // console.log("sendMessage before");
         this.selectedRoom = newRoom;
-        console.log("sendMessage after");
+        // console.log("sendMessage after");
       } catch (error) {
         helper.toggleToast("حدث خطأ ما, حاول مرة أخرى", "error");
       }
@@ -452,26 +400,26 @@ export default {
       const room =
         this.rooms?.length > 0
           ? this.rooms.find((room) => {
-              //check first user
-              if (parseInt(room.users[0]._id) === parseInt(user.id)) {
-                return true;
-              }
+            //check first user
+            if (parseInt(room.users[0]._id) === parseInt(user.id)) {
+              return true;
+            }
 
-              //check second user
-              if (parseInt(room.users[1]._id) === parseInt(user.id)) {
-                return true;
-              }
+            //check second user
+            if (parseInt(room.users[1]._id) === parseInt(user.id)) {
+              return true;
+            }
 
-              return false;
-            })
+            return false;
+          })
           : null;
 
-      console.log("roomFound", room);
+      // console.log("roomFound", room);
 
       if (room) {
-        console.log("openNewRoom found before");
+        // console.log("openNewRoom found before");
         this.selectedRoom = room;
-        console.log("openNewRoom found after");
+        // console.log("openNewRoom found after");
         this.fetchMessages({ room });
         this.closeModal();
         return;
@@ -479,7 +427,7 @@ export default {
         this.createNewRoom(user);
       }
 
-      console.log("openNewRoom after");
+      // console.log("openNewRoom after");
     },
 
     async createNewRoom(user) {
@@ -495,10 +443,10 @@ export default {
         // this.rooms = [...(this.rooms || []), room];
         // console.log(this.rooms);
 
-        console.log("createNewRoom before");
+        // console.log("createNewRoom before");
 
         this.selectedRoom = room;
-        console.log("createNewRoom after");
+        // console.log("createNewRoom after");
 
         this.closeModal();
 
