@@ -1,5 +1,5 @@
 import { api } from "../Intercepter";
-import store from '../../store';
+import store from "../../store";
 
 class generalInformationsServices {
   constructor() {
@@ -22,6 +22,12 @@ class generalInformationsServices {
     const general_informations = await api.get(`${this.prefix}/book/${bookID}`);
     general_informations.data;
     return general_informations.data.data;
+  }
+  async getGeneralInformationsForEligibleBook(eligible_user_books_id) {
+    const response = await api.get(
+      `${this.prefix}/get-general-informations-for-eligible-book/${eligible_user_books_id}`,
+    );
+    return response.data.data;
   }
 
   async addDegree(id, note, mark) {

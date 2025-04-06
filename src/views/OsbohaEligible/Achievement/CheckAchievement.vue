@@ -41,8 +41,14 @@
               قراءتك ضمن هذا الكتاب فلن تكون قادرًا على طلب تقييم كتب إضافية إلا
               بعد انتهاء فريق التقييم من مراجعة طلبك الحالي
             </h4>
-
-            <button @click="start()" type="submit" class="btn btn-primary d-block w-75 mx-auto mb-3">
+            <div class="alert alert-warning m-3" role="alert">
+              <h5 class="mb-1">تعهد بعدم النسخ والاعتماد على الجهد الشخصي في التوثيق</h5>
+              <input type="checkbox" name="isCommitted" id="isCommitted" @change="isCommitted = !isCommitted">
+              <span>
+                ولأن العلم بالتعلم، ولأن الغاية من التوثيق هو تأكيد ما تعلمت وتثبيته فالتدوين ثبات العلم، فأنا صاحب هذا الحساب، أتعهد بأن جميع ما ساقوم بتقديمه في كافة متطلبات التوثيق من اجتهادي الشخصي، وبأسلوبي وأفكاري، حيث لن أقوم بالنسخ ولن ألجأ إلى أي من أدوات الذكاء الصناعي لمساعدتي في كتابتها أو صياغتها أو تعديلها. والله على ذلك شهيد
+              </span>
+            </div>
+            <button @click="start()" type="submit" class="btn btn-primary d-block w-75 mx-auto mb-3" :disabled="!isCommitted" >
               بدء التوثيق
             </button>
 
@@ -68,6 +74,7 @@ export default {
     return {
       already_have_one: null,
       error: "",
+      isCommitted:false,
     };
   },
   methods: {
