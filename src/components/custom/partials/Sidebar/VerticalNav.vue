@@ -89,7 +89,7 @@
     <Books />
 
     <!-- ###### Osboha Eligible ###### -->
-    <OsbohaEligible />
+    <OsbohaEligible :user_id="user?.id" />
 
     <!-- ###### Osboha Support ###### -->
     <OsbohaSupport v-if="inSupportTeam" />

@@ -13,6 +13,17 @@
             <span class="item-name">توثيق كتاب</span>
         </router-link>
     </li>
+    <li class="nav-item">
+        <router-link :class="checkActive('book.eligible') ? 'active nav-link' : 'nav-link'" aria-current="page" :to="{
+            name: 'user.eligible-books',
+            params: {
+                user_id: user_id,
+            },
+        }">
+            <i class="icon material-symbols-outlined"> workspace_premium </i>
+            <span class="item-name">كتب وثقتها</span>
+        </router-link>
+    </li>
     <li class="nav-item" v-if="eligibleTeam">
         <router-link :class="checkActive('book.eligible-controle') ? 'active nav-link' : 'nav-link'" aria-current="page"
             :to="{ name: 'book.eligible-controle' }">
@@ -26,6 +37,12 @@ import UserInfoService from "@/Services/userInfoService";
 
 export default {
     name: "Eligible",
+    props: {
+        user_id: {
+            type: [Number],
+            default: null,
+        },
+    },
     computed: {
         user() {
             return this.$store.getters.getUser;

@@ -2,7 +2,8 @@
     <div class="d-grid gap-3 d-grid-template-1fr-19">
         <div class="card mb-0">
             <div class="top-bg-image">
-                <img :src="resolve_img_url(bookInfo.level.arabic_level, 'png')" alt="profile-img" class="img-fluid w-100" />
+                <img :src="resolve_img_url(bookInfo.level.arabic_level, 'png')" alt="profile-img"
+                    class="img-fluid w-100" />
             </div>
             <div class="card-body text-center">
                 <div class="group-icon">
@@ -28,8 +29,13 @@
                         </li>
                     </ul>
                 </div>
-                <button @click="listCurrentAchievement()" type="submit" class="btn btn-success d-block w-100"
-                    :class="btnClass" v-if="current">متابعة التوثيق</button>
+
+                <div v-if="current">
+                    <button v-for="(eligible_book, index) in bookInfo.eligible_user_book" :key="index"
+                        @click="listCurrentAchievement(eligible_book.id)" type="submit"
+                        class="btn btn-success d-block w-100" :class="btnClass"> {{ index > 0 ? index +1:'' }} متابعة التوثيق</button>
+
+                </div>
                 <button @click="checkAchievement()" type="submit" class="btn d-block w-100" :class="btnClass" v-else>
                     بدء التوثيق
                 </button>
@@ -65,8 +71,8 @@ export default {
         checkAchievement() {
             this.$router.push({ name: 'achievement.checkAchievement', params: { id: this.bookInfo.id } })
         },
-        listCurrentAchievement() {
-            this.$router.push({ name: `achievement.steps`, params: { id: this.bookInfo.id } })
+        listCurrentAchievement(id) {
+            this.$router.push({ name: `achievement.steps`, params: { id: id } })
         },
         resolve_img_url(path, extention) {
             return require("@/assets/images/main/" + path + "." + extention);

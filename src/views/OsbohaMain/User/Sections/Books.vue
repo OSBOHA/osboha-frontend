@@ -33,20 +33,6 @@
             </span>
           </h4>
         </router-link>
-
-        <router-link class="col-6" v-if="isAuth" :to="{
-          name: 'user.eligible-books',
-          params: {
-            user_id: this.$route.params.user_id,
-          },
-        }">
-          <h4 class="text-center mt-3 mb-3">
-            الكتب الموثقة
-            <span class="align-middle material-symbols-outlined later-book">
-              contract_edit
-            </span>
-          </h4>
-        </router-link>
         <router-link class="col-6" :to="{
           name: 'book.reading-list',
           params: {
@@ -98,7 +84,7 @@ export default {
       totalBooks: 0,
       loading: false,
       empty: '',
-      page:1,
+      page: 1,
     };
   },
   methods: {
@@ -108,7 +94,7 @@ export default {
       this.books = [];
       this.loading = true;
       try {
-        const response = await userBookService.getOsbohaUserBooks(page, this.$route.params.user_id,'');
+        const response = await userBookService.getOsbohaUserBooks(page, this.$route.params.user_id, '');
         this.books = response.books;
         this.totalBooks = response.total;
       } catch (e) {

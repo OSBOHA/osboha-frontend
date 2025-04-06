@@ -84,7 +84,11 @@ class ThesesServices {
   }
   async getById(id) {
     const response = await api.get(`${this.prefix}/${id}`);
+    return response.data.data;
+  }
 
+  async getThesesForEligibleBook(eligible_user_books_id) {
+    const response = await api.get(`${this.prefix}/get-theses-for-eligible-book/${eligible_user_books_id}`);
     return response.data.data;
   }
   async getByBook(bookID) {

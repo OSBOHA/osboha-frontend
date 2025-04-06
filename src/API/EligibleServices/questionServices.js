@@ -17,6 +17,13 @@ class questionServices {
     return questions.data.data;
   }
 
+  async getQuestionsForEligibleBook(eligible_user_books_id) {
+    const response = await api.get(
+      `${this.prefix}/get-questions-for-eligible-book/${eligible_user_books_id}`,
+    );
+    return response.data.data;
+  }
+
   async undoAccept(id) {
     const response = await api.patch(`${this.prefix}/undo/accept/${id}`);
     return response.data.data;

@@ -275,7 +275,7 @@ export default {
             }
         },
         async getInformations() {
-            const response = await generalInformationsServices.getByBook(this.$route.params.id);
+            const response = await generalInformationsServices.getGeneralInformationsForEligibleBook(this.$route.params.id);
             this.generalInformations = response.general_informations
             this.generalInfromationsform.eligible_user_books_id = response.user_book.id;
             this.book = response.user_book.book;

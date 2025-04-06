@@ -155,7 +155,7 @@ import thesisServices from "@/API/EligibleServices/thesisServices";
 export default {
   name: "Theses",
   async created() {
-    await this.getTheses();
+    await this.getThesesForEligibleBook();
   },
   components: {
     CreateThesis,
@@ -177,8 +177,8 @@ export default {
     };
   },
   methods: {
-    async getTheses() {
-      const response = await thesisServices.getByBook(this.$route.params.id);
+    async getThesesForEligibleBook() {
+      const response = await thesisServices.getThesesForEligibleBook(this.$route.params.id);
 
       this.book = response.user_book.book;
       this.theses = response.theses;

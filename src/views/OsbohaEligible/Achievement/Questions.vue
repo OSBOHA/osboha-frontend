@@ -267,7 +267,7 @@ export default {
   },
   methods: {
     async getQuestions() {
-      const response = await questionServices.getByBook(this.$route.params.id);
+      const response = await questionServices.getQuestionsForEligibleBook(this.$route.params.id);
       this.book = response.user_book.book;
       this.questions = response.questions;
       this.user_book = response.user_book;
