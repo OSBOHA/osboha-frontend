@@ -50,7 +50,7 @@
             <div class="form-group">
               <h4>إجاباتها بأسلوبك</h4>
               <div class="form-group row" v-for="(v,index) in questionForm.quotes" :key="index">
-                
+
               <textarea :disabled="message" rows="5" placeholder="اكتب لنا إجابة السؤال الذي ذكرت أعلاه بأسلوبك عدد حروفها لا يزيد عن 250، سنقوم بتفقد الصفحات المحددة أعلاه لنراجع مدى دقة الإجابة التي قدمت للسؤال"
                 class="rounded form-control mt-2 col-11" id="bookQuote" v-model="v.text" style="width:90%">
                 </textarea>
@@ -112,7 +112,7 @@ export default {
       loader: false,
       questionForm: {
         question: '',
-        starting_page: "", 
+        starting_page: "",
         ending_page: "",
         eligible_user_books_id:0,
         quotes: [
@@ -175,15 +175,15 @@ export default {
       }
 
 
-      this.v$.$touch(); 
+      this.v$.$touch();
       if (!this.v$.questionForm.$invalid) {
         this.message = "";
         this.loader = true;
         const question = await questionServices.updateQuestion(this.questionForm, this.questionToupdate.id);
-      
+
         this.questionForm.question = question.question;
         this.questionForm.pageEnd = question.ending_page;
-        this.questionForm.pageStart = question.starting_page; 
+        this.questionForm.pageStart = question.starting_page;
         this.questionForm.quotes = [{ text: "" }];
         this.v$.questionForm.$reset()
         this.loader = false;
@@ -193,7 +193,7 @@ export default {
 
     },
     back() {
-      this.$router.push({ name: 'achievement.questions' , params: { id: this.questionToupdate.user_book.book.id } })
+      this.$router.push({ name: 'achievement.questions' , params: { id: this.questionToupdate.user_book.id } })
     }
   },
 };

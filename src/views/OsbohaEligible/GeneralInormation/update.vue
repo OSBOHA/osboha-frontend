@@ -133,7 +133,7 @@ export default {
 
     },
     back() {
-      this.$router.push({ name: 'achievement.general_summary', params: { id: this.generalInfortmationToUpdate.user_book.book.id } })
+      this.$router.push({ name: 'achievement.general_summary', params: { id: this.generalInfortmationToUpdate.user_book.id } })
 
     }
   },

@@ -9,7 +9,7 @@
             </div>
 
             <div class="card-header d-flex justify-content-between ms-2 me-2" v-if="supervisorGroup">
-                <h2 class="mt-auto mb-auto" >
+                <h2 class="mt-auto mb-auto">
                     احصائية القادة
                     ||
                     <router-link :to="{
@@ -22,11 +22,19 @@
                         diversity_1
                     </span>
                 </h2>
-                <back-button routeName="group.group-detail" :routeParams="{ group_id: supervisorGroup.id }" />
+                <!-- <back-button routeName="group.group-detail" :routeParams="{ group_id: supervisorGroup.id }" /> -->
 
             </div>
 
             <div class="card-body" v-if="statistics">
+                <div class="form-group mt-3">
+                    <select class="form-select" v-model="week_id">
+                        <option value="-1">اختر الأسبوع</option>
+                        <option v-for="week in weeks" :key="week.id" :value="week.id">{{ week.title }}
+                        </option>
+                    </select>
+                </div>
+
                 <FollowupTeamsStatistics :teamData=statistics :supervisor_followup_team=supervisor_followup_team
                     :generalAvg="generalAvg" />
 
@@ -47,31 +55,52 @@
 </template>
 <script>
 import StatisticsService from "@/API/services/statistics.service";
+import WeeksService from "@/API/services/week.service";
 import FollowupTeamsStatistics from "@/components/statistics/FollowupTeams";
 import MembersReading from "@/components/statistics/MembersReading";
-import BackButton from '@/components/common/BackButton.vue';
+// import BackButton from '@/components/common/BackButton.vue';
+import { watchEffect } from "vue";
 
 export default {
     name: 'Supervisor Statistics',
     async created() {
         this.loding = true;
+        this.weeks = await WeeksService.getWeeks(10);
+        if (this.$route.params.week_id) {
+            this.week_id = this.$route.params.week_id
+        }
+        else {
+            const week = await WeeksService.getPreviousWeek();
+            this.week_id = week.id
 
-        const response = await StatisticsService.leadersStatistics(this.$route.params.supervisor_id);
-        this.statistics = response.leaders_followup_team;
-        this.leadersReading = response.leaders_reading;
-        this.supervisorGroup = response.supervisor_group;
-        this.supervisor_followup_team = response.supervisor_own_followup_team
-        this.generalAvg = response.week_general_avg;
-        this.loding = false;
+        }
+        watchEffect(async () => {
+            if (this.week_id && this.$route.params.supervisor_id) {
+                this.loding = true;
+                this.statistics = null;
+                this.leadersReading = null;
+                this.supervisorGroup = null;
+                this.supervisor_followup_team = null
+                const response = await StatisticsService.leadersStatistics(this.$route.params.supervisor_id, this.week_id);
+                this.statistics = response.leaders_followup_team;
+                this.leadersReading = response.leaders_reading;
+                this.supervisorGroup = response.supervisor_group;
+                this.supervisor_followup_team = response.supervisor_own_followup_team
+                this.generalAvg = response.week_general_avg;
+                this.loding = false;
+            }
+        });
 
     },
     components: {
         FollowupTeamsStatistics,
         MembersReading,
-        BackButton,
+        //BackButton,
     },
     data() {
         return {
+            weeks: null,
+            week_id: null,
             statistics: null,
             supervisor_followup_team: null,
             leadersReading: null,

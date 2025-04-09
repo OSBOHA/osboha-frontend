@@ -22,10 +22,10 @@ class StatisticsService {
       handleError(error);
     }
   }
-  async leadersStatistics(supervisor_id) {
+  async leadersStatistics(supervisor_id, week_id) {
     try {
       const response = await api.get(
-        `/${this.prefix}/leaders-statistics/${supervisor_id}`,
+        `/${this.prefix}/leaders-statistics/${supervisor_id}/${week_id}`,
       );
       return response.data.data;
     } catch (error) {
@@ -33,7 +33,7 @@ class StatisticsService {
     }
   }
 
-  async supervisorsStatistics(advisor_id,week_id) {
+  async supervisorsStatistics(advisor_id, week_id) {
     try {
       const response = await api.get(
         `/${this.prefix}/supervisors-statistics/${advisor_id}/${week_id}`,

@@ -164,7 +164,7 @@ export default {
     back() {
       this.$router.push({
         name: "achievement.theses",
-        params: { id: this.thesisToupdate.user_book.book.id },
+        params: { id: this.thesisToupdate.user_book.id },
       });
     },
   },

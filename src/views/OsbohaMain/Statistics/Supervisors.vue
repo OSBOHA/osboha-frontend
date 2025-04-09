@@ -78,6 +78,7 @@
                                             name: 'statistics.Leaders',
                                             params: {
                                                 supervisor_id: supervisor_team.supervisor_id,
+                                                week_id: week_id,
                                             },
                                         }" class="material-symbols-outlined md-18 me-1 text-primary">
                                             visibility
@@ -303,11 +304,17 @@ export default {
     name: 'Supervisor Statistics',
     async created() {
         this.weeks = await WeeksService.getWeeks(10);
-        const week = await WeeksService.getPreviousWeek();
-        this.week_id = week.id
+        this.week_id = this.$route.params.week_id
+        if (this.$route.params.week_id) {
+            this.week_id = this.$route.params.week_id
+        }
+        else {
+            const week = await WeeksService.getPreviousWeek();
+            this.week_id = week.id
 
+        }
         watchEffect(async () => {
-            if (this.week_id) {
+            if (this.week_id && this.$route.params.advisor_id) {
                 this.loding = true;
                 this.supervisorsReading = null;
                 this.ownFollowupTeams = null;

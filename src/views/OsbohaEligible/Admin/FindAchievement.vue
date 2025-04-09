@@ -43,7 +43,7 @@
           <hr />
           <div class="row d-flex justify-content-end align-items-center w-75 m-auto mb-3">
             <router-link class="btn btn-info display-5 " target="_blank"
-              :to="{ name: 'chat.index', query: { user_id: achievement.user.id } }">
+              :to="{ name: 'chat.index', query: { user_id: userBook.user.id } }">
 
               <span class="material-symbols-outlined align-middle">
                 forum
@@ -410,17 +410,18 @@ export default {
       window.open(`https://platform.osboha180.com/backend/public/api/v1/eligible-certificates/generate-pdf/${id}`, '_blank');
     },
     async getInfo() {
-      this.achievement = await userBookService.getFullUserBook(this.search);
+      this.achievement = await userBookService.searchUserBook(this.search);
+      console.log("🚀 ~ getInfo ~ achievement:", this.achievement)
       if (this.achievement == 'UserBook does not exist') {
         this.show = 0
       } else {
-        this.userBook = this.achievement
-        this.bookName = this.achievement.book.name;
-        this.userName = this.achievement.user.name;
-        this.certificates = this.achievement.certificates;
-        this.generalInformations = this.achievement.general_information;
-        this.theses = this.achievement.thesises;
-        this.questions = this.achievement.questions;
+        this.userBook = this.achievement.userBook
+        this.bookName = this.userBook.book.name;
+        this.userName = this.userBook.user.name;
+        this.certificates = this.userBook.certificates;
+        this.generalInformations = this.userBook.general_information;
+        this.theses = this.userBook.thesises;
+        this.questions = this.userBook.questions;
         this.show = 1
       }
 

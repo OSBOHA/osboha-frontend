@@ -131,9 +131,9 @@ class userBookServices {
     }
   }
 
-  async getFullUserBook(id) {
+  async searchUserBook(id) {
     try {
-      const response = await api.get(`${this.prefix}/${id}`);
+      const response = await api.get(`${this.prefix}/search-by-id/${id}`);
       return response.data.data;
     } catch (e) {
       return e.response.data.data;

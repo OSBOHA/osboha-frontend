@@ -49,7 +49,7 @@
             <template v-slot:body v-else>
               <div class="iq-card-body p-0">
                 <div class="image-block text-center">
-                  <img src="@/assets/images/main/stage2.png" class="img-fluid rounded w-50" alt="blog-img" />
+                  <img src="@/assets/images/main/reading_list.png" class="img-fluid rounded w-50" alt="blog-img" />
                   <h4 class="text-center mt-2 mb-3">
                     لا يوجد كتب موثقة
                   </h4>
