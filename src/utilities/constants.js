@@ -386,6 +386,7 @@ export const TERMINATION_REASONS = {
   supervisor_withdrawn: "غير فعال - انسحاب مراقب",
   advisor_change: '"غير فعال - تبديل موجه"',
   upgradet_to_advanced_followup: "غير فعال - تم الترقية إلى أفرقة متقدمة",
+  switch_administrators: "غير فعال - تبديل مسؤول",
 };
 
 export const STATUS = {

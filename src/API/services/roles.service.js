@@ -116,6 +116,18 @@ class RolesService {
       return error.response;
     }
   }
+
+  async switchAdministrators(formData) {
+    try {
+      const response = await api.post(
+        `${this.prefix}/switch-administrators`,
+        formData,
+      );
+      return response.data.data;
+    } catch (error) {
+      return error.response;
+    }
+  }
   async getSecondaryRolesByRole() {
     try {
       const response = await api.get(`${this.prefix}/secondary-roles-by-role`);

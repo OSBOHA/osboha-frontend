@@ -33,6 +33,13 @@
         <span class="material-symbols-outlined me-2 md-18"> edit </span>
         تعديل
       </router-link>
+      <router-link v-if="isAdmin || isConsultant" class="dropdown-item d-flex align-items-center" :to="{
+        name: 'control.switchAdministrators',
+        params: { group_id: group_id },
+      }">
+        <span class="material-symbols-outlined me-2 md-18"> edit </span>
+        تبديل مسؤول
+      </router-link>
       <router-link v-if="group.type.type == 'followup' && advisorAndAbove"
         class="dropdown-item d-flex align-items-center" :to="{
           name: 'control.leadersSwap',

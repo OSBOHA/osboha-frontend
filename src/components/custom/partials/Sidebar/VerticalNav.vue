@@ -83,7 +83,7 @@
       </router-link>
     </li>
     <!-- ###### Osboha Ramadan ###### -->
-    <OsbohaRamadan />
+    <!-- <OsbohaRamadan /> -->
 
     <!-- ###### Books ###### -->
     <Books />
@@ -142,7 +142,7 @@ import OsbohaSpecialCare from './OsbohaSpecialCare'
 import OsbohaWithdrawnAmbassadors from './OsbohaWithdrawnAmbassadors';
 import OsbohaSupport from './OsbohaSupport';
 import Books from './Books';
-import OsbohaRamadan from "./OsbohaRamadan";
+// import OsbohaRamadan from "./OsbohaRamadan";
 import vClickOutside from "click-outside-vue3";
 
 export default {
@@ -162,7 +162,7 @@ export default {
     OsbohaWithdrawnAmbassadors,
     OsbohaSupport,
     Books,
-    OsbohaRamadan
+    // OsbohaRamadan
   },
   computed: {
     user() {

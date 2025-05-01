@@ -135,9 +135,10 @@ export default {
   background-color: #278036 !important;
 }
 
+/* For Ramdan
 .right-sidebar-current-reading {
   top: 8.5rem !important;
-}
+} */
 
 
 .carousel-btn {

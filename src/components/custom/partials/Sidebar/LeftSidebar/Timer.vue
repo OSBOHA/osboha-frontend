@@ -114,12 +114,13 @@ export default {
 };
 </script>
 <style scoped>
-.right-sidebar-team {
+/* For Ramdan
+ .right-sidebar-team {
   top: 14.5rem !important;
-}
-/* .right-sidebar-team {
-  top: 10.5rem !important;
 } */
+.right-sidebar-team {
+  top: 10.5rem !important;
+}
 
 .toggel-btn {
   background-color: #1d1a55;
