@@ -19,7 +19,7 @@
             <span class="item-name">التجميد الاستثنائي</span>
         </router-link>
     </li>
-    <!-- ###### Exceptional Freez  ###### -->
+    <!-- ###### Withdrawn  ###### -->
     <li class="nav-item" v-if="isAdvisor">
         <router-link :class="checkActive('exceptions.listByAdvisor','withdrawn') ? 'active nav-link' : 'nav-link'
             " aria-current="page" :to="{
@@ -27,6 +27,19 @@
         params: {
             exception_type:'withdrawn',
             advisor_id: user?.id,
+        },
+    }">
+            <i class="icon material-symbols-outlined"> waving_hand </i>
+            <span class="item-name">انسحاب مؤقت</span>
+        </router-link>
+    </li>
+    <li class="nav-item" v-if="isSupervisor">
+        <router-link :class="checkActive('exceptions.listBySupervisor','withdrawn') ? 'active nav-link' : 'nav-link'
+            " aria-current="page" :to="{
+        name: 'exceptions.listBySupervisor',
+        params: {
+            exception_type:'withdrawn',
+            supervisor_id: user?.id,
         },
     }">
             <i class="icon material-symbols-outlined"> waving_hand </i>

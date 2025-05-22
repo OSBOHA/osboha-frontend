@@ -199,7 +199,7 @@ export default {
       groupAdministrators.forEach(function (admin) {
         tableHTML += `<tr>`;
         tableHTML += `<td>${ARABIC_ROLES[admin.pivot.user_type]}</td>`;
-        tableHTML += `<td>${admin.name}</td>`;
+        tableHTML += `<td>${admin.name + " " + admin.last_name}</td>`;
         tableHTML += `</tr>`;
       });
 

@@ -129,6 +129,13 @@ class ExceptionService {
     return response.data.data;
   }
 
+  async listBySupervisor(exception_type, supervisor_id) {
+    const response = await api.get(
+      `userexception/list-by-supervisor/${exception_type}/${supervisor_id}`,
+    );
+    return response.data.data;
+  }
+
   async assignToParent(exception_id) {
     try {
       const response = await api.put(

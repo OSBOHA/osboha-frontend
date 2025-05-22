@@ -730,6 +730,12 @@ const exceptionChildRoute = (prop, mode = false) => [
     meta: { auth: true, name: "List Exceptions For Advisor" },
     component: () => import("../views/OsbohaMain/Exceptions/ListByAdvisor"),
   },
+  {
+    path: "list-by-supervisor/:exception_type",
+    name: prop + ".listBySupervisor",
+    meta: { auth: true, name: "List Exceptions For Advisor" },
+    component: () => import("../views/OsbohaMain/Exceptions/listBySupervisor"),
+  },
 ];
 
 const generalConversationChildRoute = (prop, mode = false) => [

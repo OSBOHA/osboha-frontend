@@ -107,8 +107,8 @@
     <!-- ###### Audit Marks ###### -->
     <AuditMarks v-if="isAdvisor || isSupervisor" />
 
-    <!-- ###### Audit Marks ###### -->
-    <Exceptions v-if="isAdvisor" />
+    <!-- ###### Exceptions ###### -->
+    <Exceptions v-if="isAdvisor || isSupervisor" />
 
     <!-- ###### Inventory Statistics ###### -->
     <InventoryStatistics v-if="SupervisorAndAbove" />

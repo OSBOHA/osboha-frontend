@@ -28,7 +28,7 @@ import { watchEffect } from "vue";
 import ListExceptions from "@/components/exceptions/ListExceptions";
 
 export default {
-  name: "List Exceptions By Advisor",
+  name: "List Exceptions By Supervisor",
   components:{ListExceptions},
   async created() {
     try {
@@ -59,7 +59,7 @@ export default {
       this.length += 10;
     },
     async getExceptions(exception_type) {
-      const response = await exceptionService.ListByAdvisor(exception_type, this.user.id);
+      const response = await exceptionService.listBySupervisor(exception_type, this.user.id);
       this.exceptions = response.exceptions;
       this.group_title = response.advisingGroup;
 

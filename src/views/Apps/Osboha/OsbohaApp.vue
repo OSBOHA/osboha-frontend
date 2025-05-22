@@ -147,7 +147,7 @@ export default {
       }
     }
 
-    // this.fireAlert()
+    //this.fireAlert()
   },
   methods: {
     addPost(post) {
@@ -170,14 +170,14 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: " رمضان شهر الفرص، وهذه فرصتك لتعيش تجربةً مختلفةّ مع فعاليات رمضان بمشروع أصبوحة 180",
-          text: `تفضلوا بالانضمام إلينا في فعاليات أصبوحة الرمضانية، حيث نجتمع لننالَ وإيّاكم الأجر العظيم في الشهر الكريم. 🌙📚`,
-          imageUrl: require('@/assets/images/ramadan/ramadan_slogan.png'),
-          imageHeight: 300,
+          title: "وصلت الحُزمة المنتظرة",
+          text: `انضم الآن فالمقاعد محدودة جدًا، وكن جزءًا من النخبة التي تواجه الإلحاد بعلمٍ وإيمان 🔥🤝🏻`,
+          imageUrl: require('@/assets/images/main/alertMsg.png'),
+          imageHeight: 500,
           imageAlt: 'A tall image',
           showConfirmButton: true,
           showCancelButton: true,
-          confirmButtonText: "انضمام ",
+          confirmButtonText: "تفاصيل ",
           cancelButtonText: "تجاهل ",
           showClass: {
             popup: "animate__animated animate__zoomIn",
@@ -187,15 +187,12 @@ export default {
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            // this.$router.push({
-            //   name: "osboha.post",
-            //   params: {
-            //     post_id: 52696
-            //   }
-            // });
-
-            var url = "https://chat.whatsapp.com/FPHEsLX6doBFnwgiG2pq4d";
-            window.open(url, '_blank');
+            this.$router.push({
+              name: "osboha.post",
+              params: {
+                post_id: 55486
+              }
+            });
 
           }
         });
