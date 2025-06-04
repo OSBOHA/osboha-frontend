@@ -423,6 +423,18 @@ const statisticsChildRoute = (prop, mode = false) => [
     meta: { auth: true, name: "List Supervisors for Advisor" },
     component: () => import("../views/OsbohaMain/Statistics/ListSupervisors"),
   },
+  {
+    path: "duplicate-deletions/view-as/:viewer_id",
+    name: prop + ".duplicate-deletions-view-as",
+    meta: { auth: true, name: "List Duplicate Deletions" },
+    component: () => import("../views/OsbohaMain/Statistics/DuplicateDeletionsViewAs"),
+  },
+  {
+    path: "duplicate-deletions",
+    name: prop + ".duplicate-deletions",
+    meta: { auth: true, name: "List Duplicate Deletions" },
+    component: () => import("../views/OsbohaMain/Statistics/DuplicateDeletions"),
+  },
 ];
 const rolesChildRoute = (prop, mode = false) => [
   {
