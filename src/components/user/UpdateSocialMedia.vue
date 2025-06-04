@@ -94,8 +94,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <input type="text" class="form-control mt-2 ms-2" name="whatsapp" id="whatsapp"
-                                v-model="socialMediaForm.whatsapp" placeholder="+1234567890" />
+                            <PhoneInput v-model="socialMediaForm.whatsapp" />
                         </div>
                         <div class="d-flex">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
@@ -136,6 +135,7 @@
 import useVuelidate from "@vuelidate/core";
 import { required, minLength, maxLength, email } from "@vuelidate/validators";
 import SocialMedia from "@/API/services/social-media.service";
+import PhoneInput from "@/components/common/PhoneInput";
 
 
 export default {
@@ -153,6 +153,9 @@ export default {
     },
     setup() {
         return { v$: useVuelidate() };
+    },
+    components: {
+        PhoneInput
     },
     data() {
         return {

@@ -85,14 +85,12 @@
                                         </router-link>
                                     </td>
                                 </tr>
-
+                                <tr class="">
+                                    <td class="align-middle text-center" colspan="5">
+                                        <span>المعدل العام : {{ generalAvg }} </span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr class="">
-                                <td class="align-middle text-center" colspan="5">
-                                    <span>المعدل العام : {{ generalAvg }} </span>
-                                </td>
-                            </tr>
-
                         </table>
                         <hr />
                     </div>
@@ -120,12 +118,12 @@
                                         <span> {{ supervisor_team.ambassadors_withdraw_in_group }}</span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="4">
+                                        <span> العدد الكلي للمنسحبين: {{ totalWithdraw }}</span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr>
-                                <td class="align-middle text-center" colspan="4">
-                                    <span> العدد الكلي للمنسحبين: {{ totalWithdraw }}</span>
-                                </td>
-                            </tr>
                         </table>
                         <hr />
                     </div>
@@ -153,13 +151,12 @@
                                         <span> {{ supervisor_team.ambassadors_excluded_in_group }}</span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="4">
+                                        <span> العدد الكلي للمستبعدين: {{ totalExcluded }}</span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr>
-
-                                <td class="align-middle text-center" colspan="4">
-                                    <span> العدد الكلي للمستبعدين: {{ totalExcluded }}</span>
-                                </td>
-                            </tr>
                         </table>
                         <hr />
                     </div>
@@ -187,12 +184,12 @@
                                         <span> {{ supervisor_team.is_freezed }}</span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="4">
+                                        <span>العدد الكلي للمجمدين: {{ totalFreezed }} </span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr>
-                                <td class="align-middle text-center" colspan="4">
-                                    <span>العدد الكلي للمجمدين: {{ totalFreezed }} </span>
-                                </td>
-                            </tr>
                         </table>
                         <hr />
                     </div>
@@ -219,12 +216,12 @@
                                         <span> {{ supervisor_team.number_zero_varible }} </span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="4">
+                                        <span>العدد الكلي للأصفار المتحولة إلى علامة: {{ totalOfZeroVarible }} </span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr>
-                                <td class="align-middle text-center" colspan="4">
-                                    <span>العدد الكلي للأصفار المتحولة إلى علامة: {{ totalOfZeroVarible }} </span>
-                                </td>
-                            </tr>
                         </table>
                         <hr />
                     </div>
@@ -252,12 +249,12 @@
                                         <span> {{ supervisor_team.new_ambassadors }} </span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="4">
+                                        <span>العدد الكلي للأعضاء الجدد: {{ totalNewambassadors }} </span>
+                                    </td>
+                                </tr>
                             </tbody>
-                            <tr>
-                                <td class="align-middle text-center" colspan="4">
-                                    <span>العدد الكلي للأعضاء الجدد: {{ totalNewambassadors }} </span>
-                                </td>
-                            </tr>
                         </table>
                         <hr />
                     </div>
