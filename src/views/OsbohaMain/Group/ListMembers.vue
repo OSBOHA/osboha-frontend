@@ -81,6 +81,7 @@ import { copyToClipboard } from "@/utilities/commonFunctions";
 import helper from "@/utilities/helper";
 import UserInfoService from "@/Services/userInfoService";
 import BackButton from '@/components/common/BackButton.vue';
+import DuplicateUserDeletion from '@/API/services/duplicate-user-deletion.service';
 
 export default {
   name: "GroupMembers",
@@ -133,12 +134,12 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: "هل أنت متأكد؟",
-          text: "لا يمكنك التراجع عن هذا الاجراء",
+          title: "أين وُجد التكرار؟ اكتب اسم الفريق",
           icon: "warning",
+          input: "text",
           showCancelButton: true,
-          confirmButtonText: "نعم، قم بالحذف",
-          cancelButtonText: "تراجع  ",
+          confirmButtonText: "قم بالحذف",
+          cancelButtonText: "تراجع",
           showClass: {
             popup: "animate__animated animate__zoomIn",
           },
@@ -148,118 +149,120 @@ export default {
         })
         .then(async (willDelete) => {
           if (willDelete.isConfirmed) {
-            const response = await UserGroup.delete(user_group_id)
-              .then(async (response) => {
-                this.getUsers();
-                this.hideList();
-                helper.toggleToast("تم الحذف", "success");
-              })
-              .catch((error) => {
-                helper.toggleToast("حصل خطأ - لم يتم الحذف!", "danger");
-                console.log(error);
-              });
-          }
-        });
-    },
-    withdrawnMember(user_group_id) {
-      const swalWithBootstrapButtons = this.$swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-primary btn-lg",
-          cancelButton: "btn btn-outline-primary btn-lg ms-2",
-        },
-        buttonsStyling: false,
-      });
+            const duplicateIn = willDelete.value;
 
-      swalWithBootstrapButtons
-        .fire({
-          title: "هل أنت متأكد؟",
-          text: "لا يمكنك التراجع عن هذا الاجراء",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "نعم، قم بسحب السفير",
-          cancelButtonText: "تراجع  ",
-          showClass: {
-            popup: "animate__animated animate__zoomIn",
-          },
-          hideClass: {
-            popup: "animate__animated animate__zoomOut",
-          },
-        })
-        .then(async (willDelete) => {
-          if (willDelete.isConfirmed) {
-            const response = await UserGroup.withdrawnMember(user_group_id)
-              .then(async (response) => {
-                this.getUsers();
-                this.hideList();
-                helper.toggleToast("تم سحب السفير", "success");
-              })
-              .catch((error) => {
-                helper.toggleToast("حصل خطأ - لم يتم سحب السفير!", "danger");
-                console.log(error);
-              });
-          }
+            await DuplicateUserDeletion.markAsDuplicate(user_group_id, duplicateIn)
+              .then(() => {
+              this.getUsers();
+              this.hideList();
+              helper.toggleToast("تم الحذف", "success");
+            })
+        .catch((error) => {
+          helper.toggleToast("حصل خطأ - لم يتم الحذف!", "danger");
+          console.log(error);
         });
+    }
+  });
+},
+withdrawnMember(user_group_id) {
+  const swalWithBootstrapButtons = this.$swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-primary btn-lg",
+      cancelButton: "btn btn-outline-primary btn-lg ms-2",
     },
-    loadMore() {
-      if (this.length > this.users?.length) return;
-      this.length = this.length + 10;
-    },
+    buttonsStyling: false,
+  });
+
+  swalWithBootstrapButtons
+    .fire({
+      title: "هل أنت متأكد؟",
+      text: "لا يمكنك التراجع عن هذا الاجراء",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "نعم، قم بسحب السفير",
+      cancelButtonText: "تراجع  ",
+      showClass: {
+        popup: "animate__animated animate__zoomIn",
+      },
+      hideClass: {
+        popup: "animate__animated animate__zoomOut",
+      },
+    })
+    .then(async (willDelete) => {
+      if (willDelete.isConfirmed) {
+        const response = await UserGroup.withdrawnMember(user_group_id)
+          .then(async (response) => {
+            this.getUsers();
+            this.hideList();
+            helper.toggleToast("تم سحب السفير", "success");
+          })
+          .catch((error) => {
+            helper.toggleToast("حصل خطأ - لم يتم سحب السفير!", "danger");
+            console.log(error);
+          });
+      }
+    });
+},
+loadMore() {
+  if (this.length > this.users?.length) return;
+  this.length = this.length + 10;
+},
     /**
      * search for ambassador
      * @param  ambassador_name, group_id
      * @return ambassador
      */
     async searchForAmbassador() {
-      const response = await GroupService.searchForAmbassador(
-        this.ambassador_name,
-        this.$route.params.group_id
-      );
-      this.users = response.users;
-    },
+  const response = await GroupService.searchForAmbassador(
+    this.ambassador_name,
+    this.$route.params.group_id
+  );
+  this.users = response.users;
+},
   },
-  computed: {
-    usersLoaded() {
-      return this.users?.slice(0, this.length);
-    },
-    user() {
-      return this.$store.getters.getUser;
-    },
-    isAdmin() {
-      return UserInfoService.hasRole(this.user, "admin");
-    },
-    consultantAndAbove() {
-      return UserInfoService.hasRoles(this.user, [
-        "admin",
-        "consultant",
-      ]);
-    },
-    allowedToControleMember() {
-      return UserInfoService.hasRoles(this.user, [
-        "admin",
-        "consultant",
-        "advisor",
-        "special_care_coordinator",
-        "marathon_coordinator"
-      ]);
-    },
-    allowedTodelete() {
-      return UserInfoService.hasRoles(this.user, [
-        "admin",
-        "consultant",
-        "advisor",
-        "special_care_coordinator",
-        "marathon_coordinator"
-      ]);
-    },
-    allowedToWithdrawn() {
-      return UserInfoService.hasRoles(this.user, [
-        "admin",
-        "consultant",
-        "advisor",
-        "special_care_coordinator",
+computed: {
+  usersLoaded() {
+    return this.users?.slice(0, this.length);
+  },
+  user() {
+    return this.$store.getters.getUser;
+  },
+  isAdmin() {
+    return UserInfoService.hasRole(this.user, "admin");
+  },
+  consultantAndAbove() {
+    return UserInfoService.hasRoles(this.user, [
+      "admin",
+      "consultant",
+    ]);
+  },
+  allowedToControleMember() {
+    return UserInfoService.hasRoles(this.user, [
+      "admin",
+      "consultant",
+      "advisor",
+      "special_care_coordinator",
+      "marathon_coordinator"
+    ]);
+  },
+  allowedTodelete() {
+    return UserInfoService.hasRoles(this.user, [
+      "admin",
+      "consultant",
+      "advisor",
+      "special_care_coordinator",
+      "marathon_coordinator"
+    ]);
+  },
+  allowedToWithdrawn() {
+    return UserInfoService.hasRoles(this.user, [
+      "admin",
+      "consultant",
+      "advisor",
+      "special_care_coordinator",
 
-      ]);
-    }
-  },
+    ]);
+  }
+},
 };
 </script>

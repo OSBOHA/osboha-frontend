@@ -10,17 +10,17 @@
     <!-- ###### User Tree ###### -->
     <li class="nav-item">
         <router-link :class="checkActive('user.retrieve-nested-users')
-        ? 'active nav-link'
-        : 'nav-link'
-        " aria-current="page" :to="{
-        name: 'user.retrieve-nested-users',
-        params: {
-            parent_id: user?.id,
-        },
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'user.retrieve-nested-users',
+                params: {
+                    parent_id: user?.id,
+                },
 
-    }">
+            }">
             <i class="icon material-symbols-outlined"> supervisor_account </i>
-            <span class="item-name">المسؤول عنهم  </span>
+            <span class="item-name">المسؤول عنهم </span>
         </router-link>
     </li>
 
@@ -29,15 +29,15 @@
     <!-- ###### ADMIN statistics ###### -->
     <li class="nav-item" v-if="isAdmin">
         <router-link :class="checkActive('statistics.consultants')
-        ? 'active nav-link'
-        : 'nav-link'
-        " aria-current="page" :to="{
-        name: 'statistics.consultants',
-        params: {
-            admin_id: user?.id,
-        },
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'statistics.consultants',
+                params: {
+                    admin_id: user?.id,
+                },
 
-    }">
+            }">
             <i class="icon material-symbols-outlined"> monitoring </i>
             <span class="item-name">احصائية فريق الادارة </span>
         </router-link>
@@ -46,15 +46,15 @@
     <!-- ###### consultant statistics ###### -->
     <li class="nav-item" v-if="isConsultant">
         <router-link :class="checkActive('statistics.advisors')
-        ? 'active nav-link'
-        : 'nav-link'
-        " aria-current="page" :to="{
-        name: 'statistics.advisors',
-        params: {
-            consultant_id: user?.id,
-        },
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'statistics.advisors',
+                params: {
+                    consultant_id: user?.id,
+                },
 
-    }">
+            }">
             <i class="icon material-symbols-outlined"> monitoring </i>
             <span class="item-name">احصائية فريق الاستشارة </span>
         </router-link>
@@ -62,15 +62,15 @@
     <!-- ###### Advisor Audit ###### -->
     <li class="nav-item" v-if="isAdvisor">
         <router-link :class="checkActive('statistics.supervisors')
-        ? 'active nav-link'
-        : 'nav-link'
-        " aria-current="page" :to="{
-        name: 'statistics.supervisors',
-        params: {
-            advisor_id: user?.id,
-        },
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'statistics.supervisors',
+                params: {
+                    advisor_id: user?.id,
+                },
 
-    }">
+            }">
             <i class="icon material-symbols-outlined"> monitoring </i>
             <span class="item-name">احصائية فريق التوجيه </span>
         </router-link>
@@ -79,18 +79,35 @@
     <!-- ###### SUPERVISOR statistics ###### -->
     <li class="nav-item" v-if="isSupervisor">
         <router-link :class="checkActive('statistics.Leaders')
-        ? 'active nav-link'
-        : 'nav-link'
-        " aria-current="page" :to="{
-        name: 'statistics.Leaders',
-        params: {
-            supervisor_id: user?.id,
-        },
-    }">
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'statistics.Leaders',
+                params: {
+                    supervisor_id: user?.id,
+                },
+            }">
             <i class="icon material-symbols-outlined"> monitoring </i>
             <span class="item-name">احصائية الفريق الرقابي</span>
         </router-link>
     </li>
+
+    <!-- ###### Duplicate Deletions ###### -->
+    <li class="nav-item" v-if="advisorAndAbove">
+        <router-link :class="checkActive('statistics.duplicate-deletions')
+            ? 'active nav-link'
+            : 'nav-link'
+            " aria-current="page" :to="{
+                name: 'statistics.duplicate-deletions',
+                params: {
+                    supervisor_id: user?.id,
+                },
+            }">
+            <i class="icon material-symbols-outlined"> disabled_by_default </i>
+            <span class="item-name">حذف مكرر</span>
+        </router-link>
+    </li>
+
 </template>
 <script>
 import UserInfoService from "@/Services/userInfoService";
@@ -113,6 +130,14 @@ export default {
         isAdmin() {
             return UserInfoService.hasRole(this.user, "admin");
         },
+        advisorAndAbove() {
+            return UserInfoService.hasRoles(this.user, [
+                "admin",
+                "consultant",
+                "advisor",
+            ]);
+        },
+
     },
     methods: {
         checkActive(route) {

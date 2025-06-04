@@ -387,6 +387,7 @@ export const TERMINATION_REASONS = {
   advisor_change: '"غير فعال - تبديل موجه"',
   upgradet_to_advanced_followup: "غير فعال - تم الترقية إلى أفرقة متقدمة",
   switch_administrators: "غير فعال - تبديل مسؤول",
+  duplicate_entry:"غير فعال - مكرر",
 };
 
 export const STATUS = {

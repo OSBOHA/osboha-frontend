@@ -90,6 +90,7 @@ export default {
             const response = await FriendServices.create(friend_id);
         },
         async deleteMember(user_group_id) {
+            // !!! to review
             const swalWithBootstrapButtons = this.$swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-primary btn-lg",
