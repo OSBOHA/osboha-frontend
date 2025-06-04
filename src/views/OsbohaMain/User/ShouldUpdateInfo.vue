@@ -156,8 +156,8 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <input type="text" class="form-control mt-2 ms-2" name="whatsapp" id="whatsapp"
-                                        v-model="infoForm.whatsapp" placeholder="+1234567890" />
+
+                                    <PhoneInput v-model="infoForm.whatsapp" />
                                 </div>
 
                                 <!-- TELEGRAM -->
@@ -209,10 +209,12 @@ import { required, url, requiredIf } from "@vuelidate/validators";
 import UserService from "@/API/services/user.service";
 import SocialMedia from "@/API/services/social-media.service";
 import helper from "@/utilities/helper";
+import PhoneInput from "@/components/common/PhoneInput";
 
 
 export default {
     name: "Should Update Info",
+    components: { PhoneInput, },
     async created() {
         const userInfo = await UserService.show(this.user.id);
         if (userInfo) {

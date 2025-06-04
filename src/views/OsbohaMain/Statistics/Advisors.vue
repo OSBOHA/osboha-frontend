@@ -55,7 +55,7 @@
                                     <span> {{ statistics_data.number_of_leaders }} </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span> {{ (Math.round(statistics_data.week_avg )).toFixed(2) }} </span>
+                                    <span> {{ (Math.round(statistics_data.week_avg)).toFixed(2) }} </span>
                                 </td>
                                 <td class="align-middle text-center">
                                     <router-link :to="{
@@ -68,14 +68,12 @@
                                     </router-link>
                                 </td>
                             </tr>
-
+                            <tr class="">
+                                <td class="align-middle text-center" colspan="6">
+                                    <span>المعدل العام : {{ generalAvg }} </span>
+                                </td>
+                            </tr>
                         </tbody>
-                        <tr class="">
-                            <td class="align-middle text-center" colspan="6">
-                                <span>المعدل العام : {{ generalAvg }} </span>
-                            </td>
-                        </tr>
-
                     </table>
                     <hr />
                 </div>
@@ -102,12 +100,12 @@
                                     <span> {{ statistics_data.ambassadors_withdraw_in_group }}</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="align-middle text-center" colspan="4">
+                                    <span> العدد الكلي للمنسحبين: {{ totalWithdraw }}</span>
+                                </td>
+                            </tr>
                         </tbody>
-                        <tr>
-                            <td class="align-middle text-center" colspan="4">
-                                <span> العدد الكلي للمنسحبين: {{ totalWithdraw }}</span>
-                            </td>
-                        </tr>
                     </table>
                     <hr />
                 </div>
@@ -134,13 +132,12 @@
                                     <span> {{ statistics_data.ambassadors_excluded_in_group }}</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="align-middle text-center" colspan="4">
+                                    <span> العدد الكلي للمستبعدين: {{ totalExcluded }}</span>
+                                </td>
+                            </tr>
                         </tbody>
-                        <tr>
-
-                            <td class="align-middle text-center" colspan="4">
-                                <span> العدد الكلي للمستبعدين: {{ totalExcluded }}</span>
-                            </td>
-                        </tr>
                     </table>
                     <hr />
                 </div>
@@ -167,12 +164,12 @@
                                     <span> {{ statistics_data.is_freezed }}</span>
                                 </td>
                             </tr>
-                        </tbody>
                         <tr>
                             <td class="align-middle text-center" colspan="4">
                                 <span>العدد الكلي للمجمدين: {{ totalFreezed }} </span>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <hr />
                 </div>
@@ -198,12 +195,12 @@
                                     <span> {{ statistics_data.number_zero_varible }} </span>
                                 </td>
                             </tr>
-                        </tbody>
                         <tr>
                             <td class="align-middle text-center" colspan="4">
                                 <span>العدد الكلي للأصفار المتحولة إلى علامة: {{ totalOfZeroVarible }} </span>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <hr />
                 </div>
@@ -230,12 +227,12 @@
                                     <span> {{ statistics_data.new_ambassadors }} </span>
                                 </td>
                             </tr>
-                        </tbody>
                         <tr>
                             <td class="align-middle text-center" colspan="4">
                                 <span>العدد الكلي للأعضاء الجدد: {{ totalNewambassadors }} </span>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <hr />
                 </div>

@@ -60,9 +60,7 @@
                                     </router-link>
                                 </td>
                             </tr>
-
                         </tbody>
-
                     </table>
                     <hr />
                 </div>

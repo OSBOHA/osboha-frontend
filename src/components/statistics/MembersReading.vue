@@ -1,7 +1,7 @@
 <template>
     <div class="blog-description">
         <h3>
-            قراءة {{headTitle}}
+            قراءة {{ headTitle }}
             <span class="material-symbols-outlined align-middle me-1">
                 book_5
             </span>
@@ -10,7 +10,7 @@
         <table class="table inline-grid w-100">
             <thead>
                 <tr class="d-flex justify-content-around">
-                    <th scope="col">{{userType}}</th>
+                    <th scope="col">{{ userType }}</th>
                     <th scope="col">عدد الصفحات</th>
                     <th scope="col">نوع الانجاز</th>
                     <th scope="col"></th>
@@ -43,14 +43,12 @@
                     </td>
 
                 </tr>
-
+                <tr class="d-flex justify-content-center">
+                    <td class="align-middle text-center" colspan="4">
+                        <span> العدد الكلي للصفحات {{ totalPages }} </span>
+                    </td>
+                </tr>
             </tbody>
-            <tr class="d-flex justify-content-center">
-                <td class="align-middle text-center" colspan="4">
-                    <span> العدد الكلي للصفحات {{ totalPages }} </span>
-                </td>
-            </tr>
-
         </table>
         <hr />
     </div>
@@ -71,8 +69,8 @@ export default {
         },
 
     },
-    created(){
-        this.ReadingDataTofilter=this.ReadingData
+    created() {
+        this.ReadingDataTofilter = this.ReadingData
     },
     data() {
         return {

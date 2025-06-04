@@ -12,7 +12,6 @@
                             <tr v-for="(thesis, index_2) in leader" :key="index_2">
                                 <h4 class="rtl"> - {{ index_2 }}</h4>
                                 <td class="border-0" v-for="(ambassador_thesis, index) in thesis.pending_theses" :key="index">
-
                                     <router-link
                                     class="badge rounded-pill bg-secondary"
                                     :to="{

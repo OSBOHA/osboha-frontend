@@ -123,7 +123,7 @@
               <select class="form-select mt-2" v-model="infoForm.country">
                 <option value="" selected>الدولة</option>
                 <option v-for="(country, index) in COUNTRIES" :key="index" :value="index">
-                  {{ country }}
+                  {{ country.name }}
                 </option>
               </select>
             </div>
@@ -132,7 +132,7 @@
               <select class="form-select mt-2" v-model="infoForm.resident">
                 <option value="" selected>بلد الاقامة</option>
                 <option v-for="(country, index) in COUNTRIES" :key="index" :value="index">
-                  {{ country }}
+                  {{ country.name }}
                 </option>
               </select>
             </div>
@@ -223,7 +223,6 @@ import { required, minLength, maxLength, email } from "@vuelidate/validators";
 import UserProfile from "@/API/services/user-profile.service";
 import profileImagesService from "@/API/services/profile.images.service";
 import UserServices from "@/API/services/user.service";
-import Auth from '@/API/services/auth.service'
 import { COUNTRIES } from "@/utilities/constants";
 import UserInfoService from "@/Services/userInfoService";
 import UpdateSocialMedia from '@/components/user/UpdateSocialMedia';

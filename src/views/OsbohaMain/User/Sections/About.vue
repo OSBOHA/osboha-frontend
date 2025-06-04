@@ -39,7 +39,7 @@
                       width="24" height="18" :alt="COUNTRIES[user_about.country]" v-if="user_about.country" />
                   </h4>
                   <p class="mb-0 fs-6" v-if="user_about.country">
-                    {{ COUNTRIES[user_about.country] }}
+                    {{ COUNTRIES[user_about.country]?.name }}
                   </p>
                   <p class="mb-0 fs-6" v-else>غير محدد</p>
                 </div>
@@ -57,7 +57,7 @@
                       width="24" height="18" alt="United Arab Emirates" />
                   </h4>
                   <p class="mb-0 fs-6" v-if="user_about.resident">
-                    {{ COUNTRIES[user_about.resident] }}
+                    {{ COUNTRIES[user_about.resident]?.name }}
                   </p>
                   <p class="mb-0 fs-6" v-else>غير محدد</p>
                 </div>
@@ -338,7 +338,7 @@ export default {
     isAgroupAdministrators() {
       return this.groupAdministrators.includes(this.autUser.id)
     },
-    isAFriend(){
+    isAFriend() {
       return this.friends.includes(this.autUser.id)
 
     }
