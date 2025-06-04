@@ -16,7 +16,7 @@
                     <tbody v-if="exceptions && exceptions.length > 0">
                         <tr v-for="exception in exceptions.slice(0, length)" :key="exception.id">
                             <td>{{ exception.user.name + " " + exception.user.last_name }}</td>
-                            <td v-if="exception.user.followup_team.group">
+                            <td v-if="exception.user.followup_team?.group">
                                 <router-link class="text-center" :to="{
                                     name: 'group.group-detail',
                                     params: { group_id: exception.user.followup_team.group.id },
