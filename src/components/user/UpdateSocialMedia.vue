@@ -8,6 +8,11 @@
                 <img src="@/assets/images/main/social-media.png" class="img-fluid rounded w-50" alt="profile-img" />
             </div>
 
+            <mark class="p-0 ps-2 pe-2" style="background: #fcdbe0!important">
+                الروابط والمعلومات لن تكون ظاهرة لأي شخص سوى للإدارة المسؤولة عنك للتواصل معك وقت
+                الحاجة فقط
+            </mark>
+
             <div class="d-flex align-items-center mt-3">
                 <form @submit.prevent="submitSociaMedia" class="post-text ml-3 w-100 row">
                     <div class="form-group col-12">

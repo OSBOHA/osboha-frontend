@@ -388,6 +388,8 @@ export const TERMINATION_REASONS = {
   upgradet_to_advanced_followup: "غير فعال - تم الترقية إلى أفرقة متقدمة",
   switch_administrators: "غير فعال - تبديل مسؤول",
   duplicate_entry:"غير فعال - مكرر",
+  end_of_support: "غير فعال - انتهاء فترة الدعم",
+  upgradet_to_sophisticated_followup:"غير فعال - ترقية لسفير في فريق متابعة متطور"
 };
 
 export const STATUS = {

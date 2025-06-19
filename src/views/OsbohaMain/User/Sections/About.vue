@@ -70,7 +70,7 @@
                   :title="user.name" :gender="user.gender" avatarClass="rounded img-fluid" dimensions="512x512"
                   :noMainClass="true" />
               </div>
-              <div class="row mt-2" v-if="social_media && (isAgroupAdministrators || isAFriend)">
+              <div class="row mt-2" v-if="social_media && (isAgroupAdministrators)">
                 <!-- FACEBOOK -->
                 <div class="col-12 d-flex mt-1" v-if="social_media.facebook">
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"

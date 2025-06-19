@@ -33,6 +33,17 @@ class UserGroup {
       handleError(error);
     }
   }
+  async deleteSupportLeader(user_group_id) {
+      try {
+    return await api.post(`${this.prefix}/delete-support-leader`, {
+      user_group_id,
+    });
+  } catch (error) {
+    handleError(error);
+  }
+
+  }
+
   async withdrawnMember(user_group_id) {
     const formData = new FormData();
     formData.append("user_group_id", user_group_id);
@@ -47,7 +58,9 @@ class UserGroup {
   }
   async membersByMonth(group_id, month_filter) {
     try {
-      const response = await api.get(`${this.prefix}/members-by-month/${group_id}/${month_filter}`);
+      const response = await api.get(
+        `${this.prefix}/members-by-month/${group_id}/${month_filter}`,
+      );
       return response.data;
     } catch (error) {
       return error;

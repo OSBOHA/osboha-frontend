@@ -193,7 +193,7 @@ export default {
         })
         .then(async (willDelete) => {
           if (willDelete.isConfirmed) {
-            const response = await UserGroup.delete(user_group_id)
+            const response = await UserGroup.deleteSupportLeader(user_group_id)
               .then(async (response) => {
                 helper.toggleToast("تم الحذف", "success");
               })
