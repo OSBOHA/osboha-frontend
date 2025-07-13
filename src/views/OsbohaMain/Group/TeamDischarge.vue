@@ -96,11 +96,11 @@
                 <transfer-ambassadors v-if="group.type.type == 'followup' && selectedAmbassadors.length > 0"
                     :selectedAmbassadors="selectedAmbassadors" @ambassadors_transferred="setGroupInfo" />
                 <transfer-leaders v-if="group.type.type == 'supervising' && selectedAmbassadors.length > 0"
-                    :selectedLeaders="selectedAmbassadors" />
+                    :selectedLeaders="selectedAmbassadors" @leaders_transferred="setGroupInfo" />
                 <transfer-supervisors v-if="group.type.type == 'advising' && selectedAmbassadors.length > 0"
-                    :selectedSupervisors="selectedAmbassadors" />
+                    :selectedSupervisors="selectedAmbassadors" @supervisors_transferred="setGroupInfo" />
             </div>
-            <DischargeForm v-if="allowedToDischarge && group.is_active" @team-discharged="setGroupInfo" />
+            <DischargeForm v-if="allowedToDischarge && group.is_active" @team-discharged="setGroupInfo"  :group_type="group.type.type"/>
 
             <router-link class="mb-3 mt-3 text-center d-block w-100" :to="{
                 name: 'group.group-detail',

@@ -152,11 +152,11 @@ export default {
                     this.not_exists = response.not_exists;
                     this.message = response.message;
 
-                    //                    this.resetForm();
-
                     setTimeout(() => {
                         this.message = "";
                     }, 1800);
+                    this.$emit('leaders_transferred')
+
                 } catch (error) {
                     this.message = "حدث خطأ, يرجى المحاولة لاحقاً";
                 } finally {

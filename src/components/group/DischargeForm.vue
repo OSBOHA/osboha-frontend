@@ -14,10 +14,11 @@
                     <small style="color: red" v-if="v$.dischargeForm.reason.$error">سبب التفريغ مطلوب</small>
                 </div>
                 <div class="form-group">
-                    <label for="current_to">القائد الحالي إلى</label>
+                    <label for="current_to">المسؤول الحالي إلى</label>
                     <select v-model="v$.dischargeForm.current_to.$model" class="form-select" data-trigger
                         name="current_to" id="current_to">
                         <option value="" selected>اختر الحالي إلى</option>
+                        <option value="leader" v-if="group_type == 'supervising'">قائد</option>
                         <option value="ambassador">سفير</option>
                         <option value="withdrawn">منسحب</option>
                     </select>
@@ -38,7 +39,21 @@
                             صحيح</small>
                     </template>
                 </div>
-
+                <div class="form-group" v-if="dischargeForm.current_to == 'leader'">
+                    <label for="supervisor_email">المراقب الجديد</label>
+                    <input v-model="v$.dischargeForm.supervisor_email.$model" type="email" class="form-control mb-0"
+                        id="supervisor_email" placeholder="ادخل بريد المراقب الجديد" />
+                    <template v-if="v$.dischargeForm.supervisor_email.$error">
+                        <small style="color: red" v-if="v$.dischargeForm.supervisor_email.required.$invalid">البريد
+                            الالكتروني
+                            المراقب الجديد
+                            مطلوب</small>
+                        <small style="color: red" v-if="v$.dischargeForm.supervisor_email.email.$invalid">البريد
+                            الالكتروني
+                            المراقب الجديد غير
+                            صحيح</small>
+                    </template>
+                </div>
                 <div class="form-group">
                     <label for="note">ملاحظات</label>
                     <textarea type="text" v-model="v$.dischargeForm.note.$model" class="form-control mb-0" id="note"
@@ -72,6 +87,12 @@ export default {
     setup() {
         return { v$: useVuelidate() };
     },
+    props: {
+        group_type: {
+            type: String,
+            required: true,
+        },
+    },
     data() {
         return {
             dischargeForm: {
@@ -80,6 +101,7 @@ export default {
                 current_to: "",
                 note: "",
                 leader_email: null,
+                supervisor_email: null,
             },
             message: "",
             loading: false,
@@ -107,6 +129,15 @@ export default {
                     }),
                     email
                 },
+                supervisor_email: {
+                    required: requiredIf(function () {
+                        if (this.dischargeForm.current_to == 'leader')
+                            return true;
+                        else
+                            return false;
+                    }),
+                    email
+                },
             },
         };
     },
@@ -120,9 +151,8 @@ export default {
                     this.message = response;
                     setTimeout(() => {
                         this.message = "";
-                    }, 3000);
+                    }, 6000);
                     this.$emit('team-discharged')
-
                 } catch (error) {
                     this.message = "حصل خطأ - لم يتم التفريغ!";
                     console.log(error);

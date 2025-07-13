@@ -130,6 +130,7 @@ export default {
                     setTimeout(() => {
                         this.message = "";
                     }, 1800);
+                    this.$emit('supervisors_transferred')
                 } catch (error) {
                     this.message = "حدث خطأ, يرجى المحاولة لاحقاً";
                 } finally {
