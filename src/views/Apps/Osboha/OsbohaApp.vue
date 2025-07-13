@@ -147,7 +147,7 @@ export default {
       }
     }
 
-    //this.fireAlert()
+    this.fireAlert()
   },
   methods: {
     addPost(post) {
@@ -170,14 +170,14 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: "وصلت الحُزمة المنتظرة",
-          text: `انضم الآن فالمقاعد محدودة جدًا، وكن جزءًا من النخبة التي تواجه الإلحاد بعلمٍ وإيمان 🔥🤝🏻`,
-          imageUrl: require('@/assets/images/main/alertMsg.png'),
+          title: "تصويت الكتب 📚",
+          text: `اختر كتابك كما تختار رفيق دربك، فالكلمة طريق، والقراءة بداية تحوّل`,
+          imageUrl: require('@/assets/images/main/alertMsg.jpg'),
           imageHeight: 500,
           imageAlt: 'A tall image',
           showConfirmButton: true,
           showCancelButton: true,
-          confirmButtonText: "تفاصيل ",
+          confirmButtonText: "صوت الأن ",
           cancelButtonText: "تجاهل ",
           showClass: {
             popup: "animate__animated animate__zoomIn",
@@ -190,7 +190,7 @@ export default {
             this.$router.push({
               name: "osboha.post",
               params: {
-                post_id: 55486
+                post_id: 57917
               }
             });
 

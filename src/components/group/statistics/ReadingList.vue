@@ -61,11 +61,6 @@
 
 
                 </tr>
-                <tr class="d-flex justify-content-center">
-                    <td class="align-middle text-center w-100" colspan="8">
-                        <h4 class="text-center"> العدد الكلي للصفحات {{ totalPages }} </h4>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <hr />
