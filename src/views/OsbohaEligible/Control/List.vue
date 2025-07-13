@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="col-6 col-md-6 col-lg-6">
                                     <div class="card">
-                                        <a href="https://plagiarismdetector.net/" target="_blank">
+                                        <a href="https://www.duplichecker.com/ar" target="_blank">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <div
