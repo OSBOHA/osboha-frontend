@@ -18,7 +18,7 @@
         <input type="radio" :id="option.id" :value="option.id" v-model="choosedOption" class="ms-1 mt-0" @change="vote"
           :disabled="!post.allow_votes" />
         <label :for="option.id" class="form-check-label flex-grow-1 text-truncate ms-2 align-right">{{ option.option
-          }}</label>
+        }}</label>
         <span class="me-2 text-primary bold-600">
           {{ getOptionVotesPercentage(option.id) }}
         </span>
@@ -36,7 +36,7 @@ export default {
   name: "PostBody",
   inject: {
     voteOnPost: {
-      default: () => { },
+      default: () => () => { },
     },
     post: {
       required: true,
