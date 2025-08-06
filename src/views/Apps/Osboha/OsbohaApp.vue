@@ -170,10 +170,10 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: "تصويت الكتب للفئة الأدبية📚",
+          title: "تصويت الكتب للفئة الدينية",
           text: `اختر كتابك كما تختار رفيق دربك، فالكلمة طريق، والقراءة بداية تحوّل`,
           imageUrl: require('@/assets/images/main/alertMsg.jpg'),
-          imageHeight: 500,
+          // imageHeight: 500,
           imageAlt: 'A tall image',
           showConfirmButton: true,
           showCancelButton: true,
@@ -190,7 +190,7 @@ export default {
             this.$router.push({
               name: "osboha.post",
               params: {
-                post_id: 58349
+                post_id: 59528
               }
             });
 
