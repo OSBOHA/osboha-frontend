@@ -2,9 +2,11 @@
     <div class="iq-card-body ps-3 pe-3 mt-1">
         <h4 class="mb-2">
 
-            <p class="m-auto">
+            <p class="m-auto" style="direction: rtl;">
                 <span class="badge" :class="STATUS_CLASS[exception.status]">{{ STATUS[exception.status]
-                    }}
+                }}
+                </span>
+                <span class="text-danger" v-if="exception.requested_by"> - تم الطلب بواسطة: {{ exception.requested_by.name + " " + exception.requested_by.last_name}}
                 </span>
             </p>
         </h4>

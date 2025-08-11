@@ -34,7 +34,6 @@
       <span class="material-symbols-outlined align-middle"> warning </span>
       ابلاغ مخالف
     </router-link>
-
     <SuggestBook
       v-if="
         !loadingBook &&
