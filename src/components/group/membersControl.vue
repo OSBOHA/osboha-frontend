@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center mt-3 col-6"
-    v-if="(authInGroup && authInGroup.user_type != 'ambassador') || isAdmin" v-click-outside="onClickOutside">
+    v-if="(authInGroup && (authInGroup.user_type != 'ambassador' && authInGroup.user_type != 'leader')) || isAdmin" v-click-outside="onClickOutside">
     <div class="d-inline-block w-100 text-center" @click="show = !show" role="button">
       <span class="align-middle material-symbols-outlined"> settings </span>
       <span>اعدادت المجموعة</span>

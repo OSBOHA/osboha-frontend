@@ -42,7 +42,7 @@ import useVuelidate from "@vuelidate/core";
 import { required, minLength, maxLength, requiredIf } from "@vuelidate/validators";
 
 export default {
-    name: "New Exception",
+    name: "Withdrawal Reques tForm",
     async created() {
         this.exceptionForm.user_id = this.user_to_withdraw_id;
     },

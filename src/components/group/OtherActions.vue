@@ -13,7 +13,7 @@
                             ac_unit
                         </span>
                     </button>
-                    <button class="btn btn-success shadow m-1" v-if="!isnew" @click="openNewMemberForm"
+                    <button class="btn btn-success shadow m-1" v-if="isnew" @click="openNewMemberForm"
                         title="تعيين عضو جديد">
                         <span class="material-symbols-outlined align-middle">
                             emoji_people
