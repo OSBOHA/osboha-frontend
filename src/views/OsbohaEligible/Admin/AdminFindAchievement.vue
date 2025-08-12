@@ -362,7 +362,7 @@ import useVuelidate from "@vuelidate/core";
 
 
 export default {
-  name: "Find Achievements",
+  name: "Admin Find Achievements",
 
   setup() {
     return { v$: useVuelidate() };
@@ -411,7 +411,6 @@ export default {
     },
     async getInfo() {
       this.achievement = await userBookService.searchUserBook(this.search);
-      console.log("🚀 ~ getInfo ~ achievement:", this.achievement)
       if (this.achievement == 'UserBook does not exist') {
         this.show = 0
       } else {

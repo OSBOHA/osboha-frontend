@@ -427,13 +427,15 @@ const statisticsChildRoute = (prop, mode = false) => [
     path: "duplicate-deletions/view-as/:viewer_id",
     name: prop + ".duplicate-deletions-view-as",
     meta: { auth: true, name: "List Duplicate Deletions" },
-    component: () => import("../views/OsbohaMain/Statistics/DuplicateDeletionsViewAs"),
+    component: () =>
+      import("../views/OsbohaMain/Statistics/DuplicateDeletionsViewAs"),
   },
   {
     path: "duplicate-deletions",
     name: prop + ".duplicate-deletions",
     meta: { auth: true, name: "List Duplicate Deletions" },
-    component: () => import("../views/OsbohaMain/Statistics/DuplicateDeletions"),
+    component: () =>
+      import("../views/OsbohaMain/Statistics/DuplicateDeletions"),
   },
 ];
 const rolesChildRoute = (prop, mode = false) => [
@@ -914,9 +916,7 @@ const SuperAuditer = (prop, mode = false) => [
     name: prop + ".ready-to-audit",
     meta: { auth: true, name: "ready-to-audit" },
     component: () =>
-      import(
-        "../views/OsbohaEligible/SuperAuditer/ReadyToAudit"
-      ),
+      import("../views/OsbohaEligible/SuperAuditer/ReadyToAudit"),
   },
 ];
 const eligibleTeamChildRoute = (prop, mode = false) => [
@@ -925,6 +925,12 @@ const eligibleTeamChildRoute = (prop, mode = false) => [
     name: prop + ".team-work",
     meta: { auth: true, name: "team-work" },
     component: () => import("../views/OsbohaEligible/Teams/ListWork"),
+  },
+  {
+    path: "find-achievement",
+    name:  prop + ".find-achievement-to-do",
+    meta: { auth: true, name: "find-achievement-to-do" },
+    component: () => import("../views/OsbohaEligible/Control/FindAchievement"),
   },
 ];
 
@@ -951,7 +957,8 @@ const adminControll = (prop, mode = false) => [
     path: "find-achievement",
     name: prop + ".find-achievement",
     meta: { auth: true, name: "acceptNormal" },
-    component: () => import("../views/OsbohaEligible/Admin/FindAchievement"),
+    component: () =>
+      import("../views/OsbohaEligible/Admin/AdminFindAchievement"),
   },
 ];
 
@@ -1349,7 +1356,6 @@ const routes = [
     meta: { auth: true, name: "ReadyToAudit" },
     component: () => import("../views/OsbohaEligible/Control/readyToAudit"),
   },
-
   {
     path: "/general",
     name: "general",
