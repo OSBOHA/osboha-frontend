@@ -2,6 +2,32 @@
 
     <div class="sign-in-from">
         <form class="mt-2" @submit.prevent="onSubmit()">
+            <div class="form-group" v-if="selectedAmbassadors.length > 0">
+                <label for="leader_email">القائد الجديد</label>
+                <input v-model="v$.form.leader_email.$model" type="email" class="form-control mb-0" id="leader_email"
+                    placeholder="ادخل بريد القائد الجديد" @change="checkLeaderGroups" />
+                <template v-if="v$.form.leader_email.$error">
+                    <small style="color: red" v-if="v$.form.leader_email.required.$invalid">البريد الالكتروني
+                        للقائد الجديد
+                        مطلوب</small>
+                    <small style="color: red" v-if="v$.form.leader_email.email.$invalid">البريد الالكتروني
+                        للقائد الجديد غير
+                        صحيح</small>
+                </template>
+            </div>
+            <div class="form-group" v-if="leader_groups.length > 0" mt-2>
+                <span>هذا القائد مرتبط بأكثر من فريق، إلى أي فريق تريد نقل السفراء؟</span>
+                <select class="form-select" v-model="v$.form.target_group_id.$model">
+                    <option :value="null" selected>اختر الفريق </option>
+                    <option v-for="group in leader_groups" :key="group.id" :value="group.id">{{ group.name }}
+                    </option>
+                </select>
+                <template v-if="v$.form.target_group_id.$error">
+                    <small style="color: red">يجب اختيار الفريق</small>
+                </template>
+            </div>
+            <hr />
+
             <div class="form-group" v-for="(ambassador, index) in form.ambassadors" :key="index">
                 <label for="ambassador">
                     البريد الالكتروني للسفير
@@ -15,14 +41,14 @@
                     </small>
                 </div>
                 <template v-if="v$.form.ambassadors.$error">
-                    <small style="color: red" v-if="v$.ambassador.ambassador_email.required.$invalid">البريد
-                        الالكتروني
-                        للسفير
-                        مطلوب</small>
-                    <small style="color: red" v-if="v$.ambassador.ambassador_email.email.$invalid">البريد
-                        الالكتروني
-                        للسفير غير
-                        صحيح</small>
+                    <small v-for="(amb, index) in v$.form.ambassadors.$each" :key="index">
+                        <span v-if="amb.ambassador_email.required.$invalid" style="color:red">
+                            البريد الإلكتروني للسفير مطلوب
+                        </span>
+                        <span v-else-if="amb.ambassador_email.email.$invalid" style="color:red">
+                            البريد الإلكتروني للسفير غير صحيح
+                        </span>
+                    </small>
                 </template>
             </div>
             <div class="ms-2 mb-2" v-if="selectedAmbassadors.length >= 0">
@@ -34,27 +60,13 @@
                 </button>
             </div>
 
-            <div class="form-group" v-if="selectedAmbassadors.length > 0">
-                <label for="leader_email">القائد الجديد</label>
-                <input v-model="v$.form.leader_email.$model" type="email" class="form-control mb-0" id="leader_email"
-                    placeholder="ادخل بريد القائد الجديد" />
-                <template v-if="v$.form.leader_email.$error">
-                    <small style="color: red" v-if="v$.form.leader_email.required.$invalid">البريد الالكتروني
-                        للقائد الجديد
-                        مطلوب</small>
-                    <small style="color: red" v-if="v$.form.leader_email.email.$invalid">البريد الالكتروني
-                        للقائد الجديد غير
-                        صحيح</small>
-                </template>
-            </div>
-
             <div class="form-group text-center" v-if="message">
                 <small style="color: red">
                     {{ message }}
                 </small>
             </div>
 
-            <div class="form-group text-center" v-if="not_exists.length > 0">
+            <div class="form-group text-center" v-if="not_exists && not_exists.length > 0">
                 <h4> سفراء غير موجودون </h4>
                 <h5 style="color: red" v-for="ambassador in not_exists" :key="ambassador">
                     - {{ ambassador }}
@@ -77,8 +89,9 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
+import { required, email, minLength, requiredIf } from "@vuelidate/validators";
 import RolesService from "@/API/services/roles.service";
+import UserGroup from "@/API/services/user-group.service";
 
 export default {
     name: "Transfer Ambassadors",
@@ -96,10 +109,12 @@ export default {
     data() {
         return {
             loader: false,
+            leader_groups: [],
             form: {
                 ambassadors: [
                     { ambassador_email: '' }
                 ],
+                target_group_id: null,
                 leader_email: '',
             },
             message: "",
@@ -115,9 +130,16 @@ export default {
                     minLength: minLength(1),
                     $each: {
                         ambassador_email: {
+                            required,
                             email
                         }
                     }
+                },
+                target_group_id: {
+                    required: requiredIf(function () {
+                        return this.leader_groups.length > 0;
+                    }),
+
                 },
                 leader_email: { required, email },
             },
@@ -141,6 +163,7 @@ export default {
                     const response = await RolesService.transferAmbassador(this.form);
                     this.not_exists = response.not_exists;
                     this.message = response.message;
+                    console.log("🚀 ~ onSubmit ~ this.message:", this.response)
 
                     this.resetForm();
 
@@ -157,12 +180,19 @@ export default {
                 }
             }
         },
-
+        async checkLeaderGroups() {
+            if (this.form.leader_email) {
+                this.leader_groups = await UserGroup.getLeaderGroupsByEmail(this.form.leader_email);
+            }
+        },
         resetForm() {
             this.v$.form.$reset();
             this.form = {
-                ambassador_email: "",
-                leader_email: "",
+                ambassadors: [
+                    { ambassador_email: '' }
+                ],
+                target_group_id: null,
+                leader_email: ''
             };
 
         },

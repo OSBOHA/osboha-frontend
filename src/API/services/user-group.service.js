@@ -15,6 +15,14 @@ class UserGroup {
       return error;
     }
   }
+  async getLeaderGroupsByEmail(leader_email) {
+    try {
+      const response = await api.get(`${this.prefix}/leader-groups-by-email/${leader_email}`);
+      return response.data.data;
+    } catch (error) {
+      return error;
+    }
+  }
   async AddMember(memberInfo) {
     try {
       const response = await api.post(`${this.prefix}/add-member`, memberInfo, {
@@ -34,14 +42,13 @@ class UserGroup {
     }
   }
   async deleteSupportLeader(user_group_id) {
-      try {
-    return await api.post(`${this.prefix}/delete-support-leader`, {
-      user_group_id,
-    });
-  } catch (error) {
-    handleError(error);
-  }
-
+    try {
+      return await api.post(`${this.prefix}/delete-support-leader`, {
+        user_group_id,
+      });
+    } catch (error) {
+      handleError(error);
+    }
   }
 
   async withdrawnMember(user_group_id) {
