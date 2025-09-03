@@ -147,7 +147,7 @@ export default {
       }
     }
 
-    this.fireAlert()
+    // this.fireAlert()
   },
   methods: {
     addPost(post) {
@@ -170,7 +170,7 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: "تصويت الكتب للفئة التاريخية",
+          title: "تصويت الكتب للفئة الفكرية",
           text: `اختر كتابك كما تختار رفيق دربك، فالكلمة طريق، والقراءة بداية تحوّل`,
           imageUrl: require('@/assets/images/main/alertMsg.jpg'),
           // imageHeight: 500,
@@ -190,7 +190,7 @@ export default {
             this.$router.push({
               name: "osboha.post",
               params: {
-                post_id: 59877
+                post_id: 60269
               }
             });
 

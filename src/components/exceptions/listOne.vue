@@ -24,7 +24,7 @@
           <button type="button" @click="() => { show_marks = !show_marks; }"
             class="mb-3 btn bg-white text-dark border-dark w-100 d-flex justify-content-between">
             <h5>
-              انجاز السفير خلال لأسابيع الأربعة الماضبة
+              انجاز السفير خلال الأسابيع الستة الماضبة
               <span class="material-symbols-outlined align-middle me-1">
                 query_stats
               </span>

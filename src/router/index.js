@@ -21,6 +21,12 @@ const childRoutes = (prop, mode) => [
     component: () => import("../views/Apps/Osboha/OsbohaApp"),
   },
   {
+    path: "/dashboard",
+    name: prop + ".dashboard",
+    meta: { auth: true, name: "osboha dashboard" },
+    component: () => import("../views/Apps/Osboha/MainDashboard"),
+  },
+  {
     path: "accountsetting",
     name: prop + ".accountsetting",
     meta: { auth: true, name: "Account Setting" },
