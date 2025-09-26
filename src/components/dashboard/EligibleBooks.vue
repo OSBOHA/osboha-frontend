@@ -76,7 +76,6 @@ const props = defineProps({
 
 .fc-card {
     display: grid;
-    grid-template-columns: 1fr 1.1fr 1.2fr;
     gap: 16px;
     background: #D1DCCD;
     border-radius: 18px;

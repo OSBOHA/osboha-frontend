@@ -5,7 +5,7 @@
 
             <HorizontalChips :items="stats" :circle="66" :gap="14" />
 
-            <!-- START PROFILE NAVIGATION -->
+            <!-- START DASHBOARD NAVIGATION -->
             <iq-card class="iq-card">
                 <div class="iq-card-body p-0">
                     <div class="user-tabing">
@@ -13,26 +13,32 @@
                             class="nav nav-pills d-flex align-items-center justify-content-center profile-feed-items p-0 m-0">
                             <tab-nav-items class="col-sm-3 p-0" :active="true" id="pills-home-tab" href="#pills-home"
                                 ariaControls="pills-home" role="tab" :ariaSelected="true" title="الرئيسية" />
-                            <tab-nav-items class="col-sm-3 p-0" :active="false" id="pills-bout-tab"
-                                href="#profile-about" ariaControls="pills-profile" role="tab" :ariaSelected="false"
-                                title="الأسبوع الذهبي" />
+                            <tab-nav-items class="col-sm-3 p-0" :active="false" id="pills-bout-tab" href="#pills-gold"
+                                ariaControls="pills-gold" role="tab" :ariaSelected="false" title="الأسبوع الذهبي" />
                             <tab-nav-items class="col-sm-3 p-0" :active="false" id="pills-books-tab" href="#pills-books"
                                 ariaControls="pills-books" role="tab" :ariaSelected="false" title="كتب أنهيتها" />
-                            <tab-nav-items class="col-sm-3 p-0" :active="false" id="pills-statistics-tab"
-                                href="#profile-statistics" ariaControls="pills-contact" role="tab" :ariaSelected="false"
-                                title="دورات" />
+                            <tab-nav-items class="col-sm-3 p-0" :active="false" id="pills-announcements-tab"
+                                href="#pills-announcements" ariaControls="pills-announcements" role="tab"
+                                :ariaSelected="false" title="دورات" />
                         </tab-nav>
                     </div>
                 </div>
             </iq-card>
-            <!-- END PROFILE NAVIGATION -->
+            <!-- END DASHBOARD NAVIGATION -->
             <div class="col-12">
                 <div class="tab-content">
                     <tab-content-item :active="true" id="pills-home" aria-labelled-by="pills-home-tab">
                         <Home />
                     </tab-content-item>
+                    <tab-content-item :active="false" id="pills-gold" aria-labelled-by="pills-gold-tab">
+                        <Gold />
+                    </tab-content-item>
                     <tab-content-item :active="false" id="pills-books" aria-labelled-by="pills-books-tab">
                         <Books />
+                    </tab-content-item>
+                    <tab-content-item :active="false" id="pills-announcements"
+                        aria-labelled-by="pills-announcements-tab">
+                        <Announcements />
                     </tab-content-item>
                 </div>
             </div>
@@ -52,6 +58,8 @@ import HeroIntro from "@/components/common/HeroIntro";
 import HorizontalChips from "@/components/common/HorizontalChips";
 import Home from "@/components/dashboard/Home";
 import Books from "@/components/dashboard/Books";
+import Gold from "@/components/dashboard/Gold";
+import Announcements from "@/components/dashboard/Announcements";
 import SupervisorInfo from "@/components/dashboard/SupervisorInfo";
 import helper from "@/utilities/helper";
 import Divider from "@/components/common/Divider";
@@ -64,6 +72,8 @@ export default {
         HorizontalChips,
         Home,
         Books,
+        Gold,
+        Announcements,
         SupervisorInfo,
         Divider,
     },
